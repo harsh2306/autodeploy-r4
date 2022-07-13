@@ -8,7 +8,6 @@
       Temporarily disable cerner-smart-embeddable-lib
     <link rel='stylesheet' type='text/css' href='./lib/css/cerner-smart-embeddable-lib-1.0.0.min.css'>
     -->
-    <script>console.log("INSIDE Launch.html")</script>
     <title>Example-SMART-App</title>
   </head>
   <body>
@@ -23,7 +22,7 @@
     -->        
 
     <!-- FHIR Client JS Library -->
-    <script src='./lib/js/fhir-client-v0.1.12.js'></script>
+    <script type="module" src='./lib/js/fhir-client-v0.1.12.js'></script>
 
     <!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
     <!-- https://github.com/cerner/fhir-client-cerner-additions -->
