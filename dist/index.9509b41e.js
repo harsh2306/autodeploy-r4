@@ -1063,38 +1063,38 @@
     3: [
         function(require, module, exports) {
             /*!
-   * The buffer module from node.js, for the browser.
-   *
-   * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
-   * @license  MIT
-   */ var base64 = require('base64-js');
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */ var base64 = require('base64-js');
             var ieee754 = require('ieee754');
             exports.Buffer = Buffer;
             exports.SlowBuffer = Buffer;
             exports.INSPECT_MAX_BYTES = 50;
             Buffer.poolSize = 8192;
             /**
-   * If `TYPED_ARRAY_SUPPORT`:
-   *   === true    Use Uint8Array implementation (fastest)
-   *   === false   Use Object implementation (most compatible, even IE6)
-   *
-   * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
-   * Opera 11.6+, iOS 4.2+.
-   *
-   * Note:
-   *
-   * - Implementation must support adding new properties to `Uint8Array` instances.
-   *   Firefox 4-29 lacked support, fixed in Firefox 30+.
-   *   See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
-   *
-   *  - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
-   *
-   *  - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
-   *    incorrect length in some situations.
-   *
-   * We detect these buggy browsers and set `TYPED_ARRAY_SUPPORT` to `false` so they will
-   * get the Object implementation, which is slower but will work correctly.
-   */ var TYPED_ARRAY_SUPPORT = function() {
+ * If `TYPED_ARRAY_SUPPORT`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Use Object implementation (most compatible, even IE6)
+ *
+ * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+ * Opera 11.6+, iOS 4.2+.
+ *
+ * Note:
+ *
+ * - Implementation must support adding new properties to `Uint8Array` instances.
+ *   Firefox 4-29 lacked support, fixed in Firefox 30+.
+ *   See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+ *
+ *  - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+ *
+ *  - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+ *    incorrect length in some situations.
+ *
+ * We detect these buggy browsers and set `TYPED_ARRAY_SUPPORT` to `false` so they will
+ * get the Object implementation, which is slower but will work correctly.
+ */ var TYPED_ARRAY_SUPPORT = function() {
                 try {
                     var buf = new ArrayBuffer(0);
                     var arr = new Uint8Array(buf);
@@ -1108,17 +1108,17 @@
                 }
             }();
             /**
-   * Class: Buffer
-   * =============
-   *
-   * The Buffer constructor returns instances of `Uint8Array` that are augmented
-   * with function properties for all the node `Buffer` API functions. We use
-   * `Uint8Array` so that square bracket notation works as expected -- it returns
-   * a single octet.
-   *
-   * By augmenting the instances, we can avoid modifying the `Uint8Array`
-   * prototype.
-   */ function Buffer(subject, encoding, noZero) {
+ * Class: Buffer
+ * =============
+ *
+ * The Buffer constructor returns instances of `Uint8Array` that are augmented
+ * with function properties for all the node `Buffer` API functions. We use
+ * `Uint8Array` so that square bracket notation works as expected -- it returns
+ * a single octet.
+ *
+ * By augmenting the instances, we can avoid modifying the `Uint8Array`
+ * prototype.
+ */ function Buffer(subject, encoding, noZero) {
                 if (!(this instanceof Buffer)) return new Buffer(subject, encoding, noZero);
                 var type = typeof subject;
                 // Find the length
@@ -1771,9 +1771,9 @@
                 return '<Buffer ' + out.join(' ') + '>';
             };
             /**
-   * Creates a new `ArrayBuffer` with the *copied* memory of the buffer instance.
-   * Added in Node 0.12. Only available in browsers that support ArrayBuffer.
-   */ Buffer.prototype.toArrayBuffer = function() {
+ * Creates a new `ArrayBuffer` with the *copied* memory of the buffer instance.
+ * Added in Node 0.12. Only available in browsers that support ArrayBuffer.
+ */ Buffer.prototype.toArrayBuffer = function() {
                 if (typeof Uint8Array !== 'undefined') {
                     if (TYPED_ARRAY_SUPPORT) return new Buffer(this).buffer;
                     else {
@@ -1787,8 +1787,8 @@
             // ================
             var BP = Buffer.prototype;
             /**
-   * Augment a Uint8Array *instance* (not the Uint8Array class!) with Buffer methods
-   */ Buffer._augment = function(arr) {
+ * Augment a Uint8Array *instance* (not the Uint8Array class!) with Buffer methods
+ */ Buffer._augment = function(arr) {
                 arr._isBuffer = true;
                 // save reference to original Uint8Array get/set methods before overwriting
                 arr._get = arr.get;
@@ -1912,10 +1912,10 @@
                 }
             }
             /*
-   * We have to make sure that the value is a valid integer. This means that it
-   * is non-negative. It has no fractional component and that it does not
-   * exceed the maximum allowed value.
-   */ function verifuint(value, max) {
+ * We have to make sure that the value is a valid integer. This means that it
+ * is non-negative. It has no fractional component and that it does not
+ * exceed the maximum allowed value.
+ */ function verifuint(value, max) {
                 assert(typeof value === 'number', 'cannot write a non-number as a number');
                 assert(value >= 0, 'specified a negative value for writing an unsigned value');
                 assert(value <= max, 'value is larger than maximum value for type');
@@ -2277,16 +2277,16 @@
     10: [
         function(require, module, exports) {
             /*
-   * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
-   * Digest Algorithm, as defined in RFC 1321.
-   * Version 2.1 Copyright (C) Paul Johnston 1999 - 2002.
-   * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
-   * Distributed under the BSD License
-   * See http://pajhome.org.uk/crypt/md5 for more info.
-   */ var helpers = require('./helpers');
+ * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
+ * Digest Algorithm, as defined in RFC 1321.
+ * Version 2.1 Copyright (C) Paul Johnston 1999 - 2002.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for more info.
+ */ var helpers = require('./helpers');
             /*
-   * Calculate the MD5 of an array of little-endian words, and a bit length
-   */ function core_md5(x, len) {
+ * Calculate the MD5 of an array of little-endian words, and a bit length
+ */ function core_md5(x, len) {
                 /* append padding */ x[len >> 5] |= 0x80 << len % 32;
                 x[(len + 64 >>> 9 << 4) + 14] = len;
                 var a = 1732584193;
@@ -2370,8 +2370,8 @@
                 return Array(a, b, c, d);
             }
             /*
-   * These functions implement the four basic operations the algorithm uses.
-   */ function md5_cmn(q, a, b, x, s, t) {
+ * These functions implement the four basic operations the algorithm uses.
+ */ function md5_cmn(q, a, b, x, s, t) {
                 return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s), b);
             }
             function md5_ff(a, b, c, d, x, s, t) {
@@ -2387,16 +2387,16 @@
                 return md5_cmn(c ^ (b | ~d), a, b, x, s, t);
             }
             /*
-   * Add integers, wrapping at 2^32. This uses 16-bit operations internally
-   * to work around bugs in some JS interpreters.
-   */ function safe_add(x, y) {
+ * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+ * to work around bugs in some JS interpreters.
+ */ function safe_add(x, y) {
                 var lsw = (x & 0xFFFF) + (y & 0xFFFF);
                 var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
                 return msw << 16 | lsw & 0xFFFF;
             }
             /*
-   * Bitwise rotate a 32-bit number to the left.
-   */ function bit_rol(num, cnt) {
+ * Bitwise rotate a 32-bit number to the left.
+ */ function bit_rol(num, cnt) {
                 return num << cnt | num >>> 32 - cnt;
             }
             module.exports = function md5(buf) {
@@ -2412,20 +2412,20 @@
             (function(Buffer) {
                 module.exports = ripemd160;
                 /*
-  CryptoJS v3.1.2
-  code.google.com/p/crypto-js
-  (c) 2009-2013 by Jeff Mott. All rights reserved.
-  code.google.com/p/crypto-js/wiki/License
-  */ /** @preserve
-  (c) 2012 by Cédric Mesnil. All rights reserved.
-  
-  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-  
-      - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-      - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-  
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  */ // Constants table
+CryptoJS v3.1.2
+code.google.com/p/crypto-js
+(c) 2009-2013 by Jeff Mott. All rights reserved.
+code.google.com/p/crypto-js/wiki/License
+*/ /** @preserve
+(c) 2012 by Cédric Mesnil. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+    - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+    - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/ // Constants table
                 var zl = [
                     0,
                     1,
@@ -2987,13 +2987,13 @@
     14: [
         function(require, module, exports) {
             /*
-   * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
-   * in FIPS PUB 180-1
-   * Version 2.1a Copyright Paul Johnston 2000 - 2002.
-   * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
-   * Distributed under the BSD License
-   * See http://pajhome.org.uk/crypt/md5 for details.
-   */ module.exports = function(Buffer, Hash) {
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
+ * in FIPS PUB 180-1
+ * Version 2.1a Copyright Paul Johnston 2000 - 2002.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for details.
+ */ module.exports = function(Buffer, Hash) {
                 var inherits = require('util').inherits;
                 inherits(Sha1, Hash);
                 var A = 0;
@@ -3066,25 +3066,25 @@
                     return H;
                 };
                 /*
-     * Perform the appropriate triplet combination function for the current
-     * iteration
-     */ function sha1_ft(t, b, c, d) {
+   * Perform the appropriate triplet combination function for the current
+   * iteration
+   */ function sha1_ft(t, b, c, d) {
                     if (t < 20) return b & c | ~b & d;
                     if (t < 40) return b ^ c ^ d;
                     if (t < 60) return b & c | b & d | c & d;
                     return b ^ c ^ d;
                 }
                 /*
-     * Determine the appropriate additive constant for the current iteration
-     */ function sha1_kt(t) {
+   * Determine the appropriate additive constant for the current iteration
+   */ function sha1_kt(t) {
                     return t < 20 ? 1518500249 : t < 40 ? 1859775393 : t < 60 ? -1894007588 : -899497514;
                 }
                 /*
-     * Add integers, wrapping at 2^32. This uses 16-bit operations internally
-     * to work around bugs in some JS interpreters.
-     * //dominictarr: this is 10 years old, so maybe this can be dropped?)
-     *
-     */ function add(x, y) {
+   * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+   * to work around bugs in some JS interpreters.
+   * //dominictarr: this is 10 years old, so maybe this can be dropped?)
+   *
+   */ function add(x, y) {
                     return x + y | 0;
                 //lets see how this goes on testling.
                 //  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
@@ -3092,8 +3092,8 @@
                 //  return (msw << 16) | (lsw & 0xFFFF);
                 }
                 /*
-     * Bitwise rotate a 32-bit number to the left.
-     */ function rol(num, cnt) {
+   * Bitwise rotate a 32-bit number to the left.
+   */ function rol(num, cnt) {
                     return num << cnt | num >>> 32 - cnt;
                 }
                 return Sha1;
@@ -3106,12 +3106,12 @@
     15: [
         function(require, module, exports) {
             /**
-   * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
-   * in FIPS 180-2
-   * Version 2.2-beta Copyright Angel Marin, Paul Johnston 2000 - 2009.
-   * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
-   *
-   */ var inherits = require('util').inherits;
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
+ * in FIPS 180-2
+ * Version 2.2-beta Copyright Angel Marin, Paul Johnston 2000 - 2009.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ *
+ */ var inherits = require('util').inherits;
             var BE = false;
             var LE = true;
             var u = require('./util');
@@ -3353,8 +3353,8 @@
                             if (keylen > 20) cplen = 20;
                             else cplen = keylen;
                             /* We are unlikely to ever use more than 256 blocks (5120 bits!)
-           * but just in case...
-           */ itmp[0] = i >> 24 & 0xff;
+         * but just in case...
+         */ itmp[0] = i >> 24 & 0xff;
                             itmp[1] = i >> 16 & 0xff;
                             itmp[2] = i >> 8 & 0xff;
                             itmp[3] = i & 0xff;
@@ -3390,8 +3390,8 @@
                     module.exports = function(size) {
                         var bytes = new Buffer(size); //in browserify, this is an extended Uint8Array
                         /* This will not work in older browsers.
-       * See https://developer.mozilla.org/en-US/docs/Web/API/window.crypto.getRandomValues
-       */ crypto.getRandomValues(bytes);
+     * See https://developer.mozilla.org/en-US/docs/Web/API/window.crypto.getRandomValues
+     */ crypto.getRandomValues(bytes);
                         return bytes;
                     };
                 })();
@@ -5553,12 +5553,12 @@
                     return debugs[set];
                 };
                 /**
-   * Echos the value of a value. Trys to print the value out
-   * in the best way possible given the different types.
-   *
-   * @param {Object} obj The object to print out.
-   * @param {Object} opts Optional options object that alters the output.
-   */ /* legacy: obj, showHidden, depth, colors*/ function inspect(obj, opts) {
+ * Echos the value of a value. Trys to print the value out
+ * in the best way possible given the different types.
+ *
+ * @param {Object} obj The object to print out.
+ * @param {Object} opts Optional options object that alters the output.
+ */ /* legacy: obj, showHidden, depth, colors*/ function inspect(obj, opts) {
                     // default options
                     var ctx = {
                         seen: [],
@@ -5897,18 +5897,18 @@
                     console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
                 };
                 /**
-   * Inherit the prototype methods from one constructor into another.
-   *
-   * The Function.prototype.inherits from lang.js rewritten as a standalone
-   * function (not on Function.prototype). NOTE: If this file is to be loaded
-   * during bootstrapping this function needs to be rewritten using some native
-   * functions as prototype setup using normal JavaScript does not work as
-   * expected during bootstrapping (see mirror.js in r114903).
-   *
-   * @param {function} ctor Constructor function which needs to inherit the
-   *     prototype.
-   * @param {function} superCtor Constructor function to inherit prototype from.
-   */ exports.inherits = require('inherits');
+ * Inherit the prototype methods from one constructor into another.
+ *
+ * The Function.prototype.inherits from lang.js rewritten as a standalone
+ * function (not on Function.prototype). NOTE: If this file is to be loaded
+ * during bootstrapping this function needs to be rewritten using some native
+ * functions as prototype setup using normal JavaScript does not work as
+ * expected during bootstrapping (see mirror.js in r114903).
+ *
+ * @param {function} ctor Constructor function which needs to inherit the
+ *     prototype.
+ * @param {function} superCtor Constructor function to inherit prototype from.
+ */ exports.inherits = require('inherits');
                 exports._extend = function(origin, add) {
                     // Don't do anything if add isn't an object
                     if (!add || !isObject(add)) return origin;
@@ -5949,18 +5949,18 @@
     39: [
         function(require, module, exports) {
             /*!
-   * jQuery JavaScript Library v2.1.1
-   * http://jquery.com/
-   *
-   * Includes Sizzle.js
-   * http://sizzlejs.com/
-   *
-   * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
-   * Released under the MIT license
-   * http://jquery.org/license
-   *
-   * Date: 2014-05-01T17:11Z
-   */ (function(global, factory) {
+ * jQuery JavaScript Library v2.1.1
+ * http://jquery.com/
+ *
+ * Includes Sizzle.js
+ * http://sizzlejs.com/
+ *
+ * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
+ * Released under the MIT license
+ * http://jquery.org/license
+ *
+ * Date: 2014-05-01T17:11Z
+ */ (function(global, factory) {
                 if (typeof module === "object" && typeof module.exports === "object") // For CommonJS and CommonJS-like environments where a proper window is present,
                 // execute the factory and get jQuery
                 // For environments that do not inherently posses a window with a document
@@ -6288,15 +6288,15 @@
                     return type === "array" || length === 0 || typeof length === "number" && length > 0 && length - 1 in obj;
                 }
                 var Sizzle1 = /*!
-   * Sizzle CSS Selector Engine v1.10.19
-   * http://sizzlejs.com/
-   *
-   * Copyright 2013 jQuery Foundation, Inc. and other contributors
-   * Released under the MIT license
-   * http://jquery.org/license
-   *
-   * Date: 2014-04-18
-   */ function(window) {
+ * Sizzle CSS Selector Engine v1.10.19
+ * http://sizzlejs.com/
+ *
+ * Copyright 2013 jQuery Foundation, Inc. and other contributors
+ * Released under the MIT license
+ * http://jquery.org/license
+ *
+ * Date: 2014-04-18
+ */ function(window) {
                     var i1, support, Expr, getText, isXML1, tokenize, compile, select, outermostContext, sortInput, hasDuplicate, // Local document vars
                     setDocument, document, docElem, documentIsHTML, rbuggyQSA, rbuggyMatches, matches1, contains, // Instance-specific data
                     expando = "sizzle" + -new Date(), preferredDoc = window.document, dirruns = 0, done = 0, classCache = createCache(), tokenCache = createCache(), compilerCache = createCache(), sortOrder = function(a, b) {
@@ -6439,11 +6439,11 @@
                         return select(selector.replace(rtrim, "$1"), context, results, seed);
                     }
                     /**
-   * Create key-value caches of limited size
-   * @returns {Function(string, Object)} Returns the Object data after storing it on itself with
-   *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
-   *	deleting the oldest entry
-   */ function createCache() {
+ * Create key-value caches of limited size
+ * @returns {Function(string, Object)} Returns the Object data after storing it on itself with
+ *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
+ *	deleting the oldest entry
+ */ function createCache() {
                         var keys = [];
                         function cache(key, value) {
                             // Use (key + " ") to avoid collision with native prototype properties (see Issue #157)
@@ -6454,16 +6454,16 @@
                         return cache;
                     }
                     /**
-   * Mark a function for special use by Sizzle
-   * @param {Function} fn The function to mark
-   */ function markFunction(fn) {
+ * Mark a function for special use by Sizzle
+ * @param {Function} fn The function to mark
+ */ function markFunction(fn) {
                         fn[expando] = true;
                         return fn;
                     }
                     /**
-   * Support testing using an element
-   * @param {Function} fn Passed the created div and expects a boolean result
-   */ function assert(fn) {
+ * Support testing using an element
+ * @param {Function} fn Passed the created div and expects a boolean result
+ */ function assert(fn) {
                         var div = document.createElement("div");
                         try {
                             return !!fn(div);
@@ -6477,19 +6477,19 @@
                         }
                     }
                     /**
-   * Adds the same handler for all of the specified attrs
-   * @param {String} attrs Pipe-separated list of attributes
-   * @param {Function} handler The method that will be applied
-   */ function addHandle(attrs, handler) {
+ * Adds the same handler for all of the specified attrs
+ * @param {String} attrs Pipe-separated list of attributes
+ * @param {Function} handler The method that will be applied
+ */ function addHandle(attrs, handler) {
                         var arr = attrs.split("|"), i = attrs.length;
                         while(i--)Expr.attrHandle[arr[i]] = handler;
                     }
                     /**
-   * Checks document order of two siblings
-   * @param {Element} a
-   * @param {Element} b
-   * @returns {Number} Returns less than 0 if a precedes b, greater than 0 if a follows b
-   */ function siblingCheck(a, b) {
+ * Checks document order of two siblings
+ * @param {Element} a
+ * @param {Element} b
+ * @returns {Number} Returns less than 0 if a precedes b, greater than 0 if a follows b
+ */ function siblingCheck(a, b) {
                         var cur = b && a, diff = cur && a.nodeType === 1 && b.nodeType === 1 && (~b.sourceIndex || MAX_NEGATIVE) - (~a.sourceIndex || MAX_NEGATIVE);
                         // Use IE sourceIndex if available on both nodes
                         if (diff) return diff;
@@ -6500,27 +6500,27 @@
                         return a ? 1 : -1;
                     }
                     /**
-   * Returns a function to use in pseudos for input types
-   * @param {String} type
-   */ function createInputPseudo(type) {
+ * Returns a function to use in pseudos for input types
+ * @param {String} type
+ */ function createInputPseudo(type) {
                         return function(elem) {
                             var name = elem.nodeName.toLowerCase();
                             return name === "input" && elem.type === type;
                         };
                     }
                     /**
-   * Returns a function to use in pseudos for buttons
-   * @param {String} type
-   */ function createButtonPseudo(type) {
+ * Returns a function to use in pseudos for buttons
+ * @param {String} type
+ */ function createButtonPseudo(type) {
                         return function(elem) {
                             var name = elem.nodeName.toLowerCase();
                             return (name === "input" || name === "button") && elem.type === type;
                         };
                     }
                     /**
-   * Returns a function to use in pseudos for positionals
-   * @param {Function} fn
-   */ function createPositionalPseudo(fn) {
+ * Returns a function to use in pseudos for positionals
+ * @param {Function} fn
+ */ function createPositionalPseudo(fn) {
                         return markFunction(function(argument) {
                             argument = +argument;
                             return markFunction(function(seed, matches) {
@@ -6531,29 +6531,29 @@
                         });
                     }
                     /**
-   * Checks a node for validity as a Sizzle context
-   * @param {Element|Object=} context
-   * @returns {Element|Object|Boolean} The input node if acceptable, otherwise a falsy value
-   */ function testContext(context) {
+ * Checks a node for validity as a Sizzle context
+ * @param {Element|Object=} context
+ * @returns {Element|Object|Boolean} The input node if acceptable, otherwise a falsy value
+ */ function testContext(context) {
                         return context && typeof context.getElementsByTagName !== strundefined && context;
                     }
                     // Expose support vars for convenience
                     support = Sizzle.support = {};
                     /**
-   * Detects XML nodes
-   * @param {Element|Object} elem An element or a document
-   * @returns {Boolean} True iff elem is a non-HTML XML node
-   */ isXML1 = Sizzle.isXML = function(elem) {
+ * Detects XML nodes
+ * @param {Element|Object} elem An element or a document
+ * @returns {Boolean} True iff elem is a non-HTML XML node
+ */ isXML1 = Sizzle.isXML = function(elem) {
                         // documentElement is verified for cases where it doesn't yet exist
                         // (such as loading iframes in IE - #4833)
                         var documentElement = elem && (elem.ownerDocument || elem).documentElement;
                         return documentElement ? documentElement.nodeName !== "HTML" : false;
                     };
                     /**
-   * Sets document-related variables once based on the current document
-   * @param {Element|Object} [doc] An element or document object to use to set the document
-   * @returns {Object} Returns the current document
-   */ setDocument = Sizzle.setDocument = function(node1) {
+ * Sets document-related variables once based on the current document
+ * @param {Element|Object} [doc] An element or document object to use to set the document
+ * @returns {Object} Returns the current document
+ */ setDocument = Sizzle.setDocument = function(node1) {
                         var hasCompare, doc = node1 ? node1.ownerDocument || node1 : preferredDoc, parent = doc.defaultView;
                         // If no document and documentElement is available, return
                         if (doc === document || doc.nodeType !== 9 || !doc.documentElement) return document;
@@ -6576,14 +6576,14 @@
                             });
                         }
                         /* Attributes
-    ---------------------------------------------------------------------- */ // Support: IE<8
+	---------------------------------------------------------------------- */ // Support: IE<8
                         // Verify that getAttribute really returns attributes and not properties (excepting IE8 booleans)
                         support.attributes = assert(function(div) {
                             div.className = "i";
                             return !div.getAttribute("className");
                         });
                         /* getElement(s)By*
-    ---------------------------------------------------------------------- */ // Check if getElementsByTagName("*") returns only elements
+	---------------------------------------------------------------------- */ // Check if getElementsByTagName("*") returns only elements
                         support.getElementsByTagName = assert(function(div) {
                             div.appendChild(doc.createComment(""));
                             return !div.getElementsByTagName("*").length;
@@ -6653,7 +6653,7 @@
                             if (typeof context.getElementsByClassName !== strundefined && documentIsHTML) return context.getElementsByClassName(className);
                         };
                         /* QSA/matchesSelector
-    ---------------------------------------------------------------------- */ // QSA and matchesSelector support
+	---------------------------------------------------------------------- */ // QSA and matchesSelector support
                         // matchesSelector(:active) reports false when true (IE9/Opera 11.5)
                         rbuggyMatches = [];
                         // qSa(:focus) reports false when true (Chrome 21)
@@ -6714,7 +6714,7 @@
                         rbuggyQSA = rbuggyQSA.length && new RegExp(rbuggyQSA.join("|"));
                         rbuggyMatches = rbuggyMatches.length && new RegExp(rbuggyMatches.join("|"));
                         /* Contains
-    ---------------------------------------------------------------------- */ hasCompare = rnative.test(docElem.compareDocumentPosition);
+	---------------------------------------------------------------------- */ hasCompare = rnative.test(docElem.compareDocumentPosition);
                         // Element contains another
                         // Purposefully does not implement inclusive descendent
                         // As in, an element does not contain itself
@@ -6728,7 +6728,7 @@
                             return false;
                         };
                         /* Sorting
-    ---------------------------------------------------------------------- */ // Document order sorting
+	---------------------------------------------------------------------- */ // Document order sorting
                         sortOrder = hasCompare ? function(a, b) {
                             // Flag for duplicate removal
                             if (a === b) {
@@ -6812,9 +6812,9 @@
                         throw new Error("Syntax error, unrecognized expression: " + msg);
                     };
                     /**
-   * Document sorting and removing duplicates
-   * @param {ArrayLike} results
-   */ Sizzle.uniqueSort = function(results) {
+ * Document sorting and removing duplicates
+ * @param {ArrayLike} results
+ */ Sizzle.uniqueSort = function(results) {
                         var elem, duplicates = [], j = 0, i = 0;
                         // Unless we *know* we can detect duplicates, assume their presence
                         hasDuplicate = !support.detectDuplicates;
@@ -6830,9 +6830,9 @@
                         return results;
                     };
                     /**
-   * Utility function for retrieving the text value of an array of DOM nodes
-   * @param {Array|Element} elem
-   */ getText = Sizzle.getText = function(elem) {
+ * Utility function for retrieving the text value of an array of DOM nodes
+ * @param {Array|Element} elem
+ */ getText = Sizzle.getText = function(elem) {
                         var node, ret = "", i = 0, nodeType = elem.nodeType;
                         if (!nodeType) // If no nodeType, this is expected to be an array
                         while(node = elem[i++])// Do not traverse comment nodes
@@ -6880,15 +6880,15 @@
                             },
                             "CHILD": function(match) {
                                 /* matches from matchExpr["CHILD"]
-          1 type (only|nth|...)
-          2 what (child|of-type)
-          3 argument (even|odd|\d*|\d*n([+-]\d+)?|...)
-          4 xn-component of xn+y argument ([+-]?\d*n|)
-          5 sign of xn-component
-          6 x of xn-component
-          7 sign of y-component
-          8 y of y-component
-        */ match[1] = match[1].toLowerCase();
+				1 type (only|nth|...)
+				2 what (child|of-type)
+				3 argument (even|odd|\d*|\d*n([+-]\d+)?|...)
+				4 xn-component of xn+y argument ([+-]?\d*n|)
+				5 sign of xn-component
+				6 x of xn-component
+				7 sign of y-component
+				8 y of y-component
+			*/ match[1] = match[1].toLowerCase();
                                 if (match[1].slice(0, 3) === "nth") {
                                     // nth-* requires argument
                                     if (!match[3]) Sizzle.error(match[0]);
@@ -7444,14 +7444,14 @@
                         return cached;
                     };
                     /**
-   * A low-level selection function that works with Sizzle's compiled
-   *  selector functions
-   * @param {String|Function} selector A selector or a pre-compiled
-   *  selector function built with Sizzle.compile
-   * @param {Element} context
-   * @param {Array} [results]
-   * @param {Array} [seed] A set of elements to match against
-   */ select = Sizzle.select = function(selector, context, results, seed) {
+ * A low-level selection function that works with Sizzle's compiled
+ *  selector functions
+ * @param {String|Function} selector A selector or a pre-compiled
+ *  selector function built with Sizzle.compile
+ * @param {Element} context
+ * @param {Array} [results]
+ * @param {Array} [seed] A set of elements to match against
+ */ select = Sizzle.select = function(selector, context, results, seed) {
                         var i, tokens, token, type, find, compiled = typeof selector === "function" && selector, match = !seed && tokenize(selector = compiled.selector || selector);
                         results = results || [];
                         // Try to minimize operations if there is no seed and only one group
@@ -7791,27 +7791,27 @@
                     return object;
                 }
                 /*
-   * Create a callback list using the following parameters:
-   *
-   *	options: an optional list of space-separated options that will change how
-   *			the callback list behaves or a more traditional option object
-   *
-   * By default a callback list will act like an event callback list and can be
-   * "fired" multiple times.
-   *
-   * Possible options:
-   *
-   *	once:			will ensure the callback list can only be fired once (like a Deferred)
-   *
-   *	memory:			will keep track of previous values and will call any callback added
-   *					after the list has been fired right away with the latest "memorized"
-   *					values (like a Deferred)
-   *
-   *	unique:			will ensure a callback can only be added once (no duplicate in the list)
-   *
-   *	stopOnFalse:	interrupt callings when a callback returns false
-   *
-   */ jQuery.Callbacks = function(options) {
+ * Create a callback list using the following parameters:
+ *
+ *	options: an optional list of space-separated options that will change how
+ *			the callback list behaves or a more traditional option object
+ *
+ * By default a callback list will act like an event callback list and can be
+ * "fired" multiple times.
+ *
+ * Possible options:
+ *
+ *	once:			will ensure the callback list can only be fired once (like a Deferred)
+ *
+ *	memory:			will keep track of previous values and will call any callback added
+ *					after the list has been fired right away with the latest "memorized"
+ *					values (like a Deferred)
+ *
+ *	unique:			will ensure a callback can only be added once (no duplicate in the list)
+ *
+ *	stopOnFalse:	interrupt callings when a callback returns false
+ *
+ */ jQuery.Callbacks = function(options) {
                     // Convert options from String-formatted to Object-formatted if needed
                     // (we check in cache first)
                     options = typeof options === "string" ? optionsCache[options] || createOptions(options) : jQuery.extend({}, options);
@@ -8080,8 +8080,8 @@
                     }
                 });
                 /**
-   * The ready event handler and self cleanup method
-   */ function completed() {
+ * The ready event handler and self cleanup method
+ */ function completed() {
                     document1.removeEventListener("DOMContentLoaded", completed, false);
                     window1.removeEventListener("load", completed, false);
                     jQuery.ready();
@@ -8136,8 +8136,8 @@
                     bulk ? fn.call(elems) : len ? fn(elems[0], key) : emptyGet;
                 };
                 /**
-   * Determines whether an object can have data
-   */ jQuery.acceptData = function(owner) {
+ * Determines whether an object can have data
+ */ jQuery.acceptData = function(owner) {
                     // Accepts only:
                     //  - Node
                     //    - Node.ELEMENT_NODE
@@ -8279,16 +8279,16 @@
                 var data_priv = new Data();
                 var data_user = new Data();
                 /*
-    Implementation Summary
-  
-    1. Enforce API surface and semantic compatibility with 1.9.x branch
-    2. Improve the module's maintainability by reducing the storage
-      paths to a single mechanism.
-    3. Use the same single mechanism to support "private" and "user" data.
-    4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
-    5. Avoid exposing implementation details on user objects (eg. expando properties)
-    6. Provide a clear path for implementation upgrade to WeakMap in 2014
-  */ var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/, rmultiDash = /([A-Z])/g;
+	Implementation Summary
+
+	1. Enforce API surface and semantic compatibility with 1.9.x branch
+	2. Improve the module's maintainability by reducing the storage
+		paths to a single mechanism.
+	3. Use the same single mechanism to support "private" and "user" data.
+	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
+	5. Avoid exposing implementation details on user objects (eg. expando properties)
+	6. Provide a clear path for implementation upgrade to WeakMap in 2014
+*/ var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/, rmultiDash = /([A-Z])/g;
                 function dataAttr(elem, key, data) {
                     var name;
                     // If nothing was found internally, try to fetch any
@@ -8539,9 +8539,9 @@
                     } catch (err) {}
                 }
                 /*
-   * Helper functions for managing events -- not part of the public interface.
-   * Props to Dean Edwards' addEvent library for many of the ideas.
-   */ jQuery.event = {
+ * Helper functions for managing events -- not part of the public interface.
+ * Props to Dean Edwards' addEvent library for many of the ideas.
+ */ jQuery.event = {
                     global: {},
                     add: function(elem, types, handler, data, selector) {
                         var handleObjIn, eventHandle, tmp, events, t, handleObj, special, handlers, type, namespaces, origType, elemData = data_priv.get(elem);
@@ -9451,10 +9451,10 @@
                 });
                 var iframe, elemdisplay = {};
                 /**
-   * Retrieve the actual display of a element
-   * @param {String} name nodeName of the element
-   * @param {Object} doc Document object
-   */ // Called only from within defaultDisplay
+ * Retrieve the actual display of a element
+ * @param {String} name nodeName of the element
+ * @param {Object} doc Document object
+ */ // Called only from within defaultDisplay
                 function actualDisplay(name, doc) {
                     var style, elem = jQuery(doc.createElement(name)).appendTo(doc.body), // getDefaultComputedStyle might be reliably used only on attached element
                     display = window1.getDefaultComputedStyle && (style = window1.getDefaultComputedStyle(elem[0])) ? // Use of this method is a temporary fix (more like optmization) until something better comes along,
@@ -9466,9 +9466,9 @@
                     return display;
                 }
                 /**
-   * Try to determine the default display value of an element
-   * @param {String} nodeName
-   */ function defaultDisplay(nodeName) {
+ * Try to determine the default display value of an element
+ * @param {String} nodeName
+ */ function defaultDisplay(nodeName) {
                     var doc = document1, display = elemdisplay[nodeName];
                     if (!display) {
                         display = actualDisplay(nodeName, doc);
@@ -10766,18 +10766,18 @@
                 var // Document location
                 ajaxLocParts, ajaxLocation, rhash = /#.*$/, rts = /([?&])_=[^&]*/, rheaders = /^(.*?):[ \t]*([^\r\n]*)$/mg, // #7653, #8125, #8152: local protocol detection
                 rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/, rnoContent = /^(?:GET|HEAD)$/, rprotocol = /^\/\//, rurl = /^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/, /* Prefilters
-     * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
-     * 2) These are called:
-     *    - BEFORE asking for a transport
-     *    - AFTER param serialization (s.data is a string if s.processData is true)
-     * 3) key is the dataType
-     * 4) the catchall symbol "*" can be used
-     * 5) execution will start with transport dataType and THEN continue down to "*" if needed
-     */ prefilters = {}, /* Transports bindings
-     * 1) key is the dataType
-     * 2) the catchall symbol "*" can be used
-     * 3) selection will start with transport dataType and THEN go to "*" if needed
-     */ transports = {}, // Avoid comment-prolog char sequence (#10098); must appease lint and evade compression
+	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
+	 * 2) These are called:
+	 *    - BEFORE asking for a transport
+	 *    - AFTER param serialization (s.data is a string if s.processData is true)
+	 * 3) key is the dataType
+	 * 4) the catchall symbol "*" can be used
+	 * 5) execution will start with transport dataType and THEN continue down to "*" if needed
+	 */ prefilters = {}, /* Transports bindings
+	 * 1) key is the dataType
+	 * 2) the catchall symbol "*" can be used
+	 * 3) selection will start with transport dataType and THEN go to "*" if needed
+	 */ transports = {}, // Avoid comment-prolog char sequence (#10098); must appease lint and evade compression
                 allTypes = "*/".concat("*");
                 // #8138, IE may throw an exception when accessing
                 // a field from window.location if document.domain has been set
@@ -10840,9 +10840,9 @@
                     return target;
                 }
                 /* Handles responses to an ajax request:
-   * - finds the right dataType (mediates between content-type and expected dataType)
-   * - returns the corresponding response
-   */ function ajaxHandleResponses(s, jqXHR, responses) {
+ * - finds the right dataType (mediates between content-type and expected dataType)
+ * - returns the corresponding response
+ */ function ajaxHandleResponses(s, jqXHR, responses) {
                     var ct, type, finalDataType, firstDataType, contents = s.contents, dataTypes = s.dataTypes;
                     // Remove auto dataType and get content-type in the process
                     while(dataTypes[0] === "*"){
@@ -10879,8 +10879,8 @@
                     }
                 }
                 /* Chain conversions given the request and the original response
-   * Also sets the responseXXX fields on the jqXHR instance
-   */ function ajaxConvert(s, response, jqXHR, isSuccess) {
+ * Also sets the responseXXX fields on the jqXHR instance
+ */ function ajaxConvert(s, response, jqXHR, isSuccess) {
                     var conv2, current, conv, tmp, prev, converters = {}, // Work with a copy of dataTypes in case we need to modify it for conversion
                     dataTypes = s.dataTypes.slice();
                     // Create converters map with lowercased keys
@@ -10953,16 +10953,16 @@
                         async: true,
                         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                         /*
-      timeout: 0,
-      data: null,
-      dataType: null,
-      username: null,
-      password: null,
-      cache: null,
-      throws: false,
-      traditional: false,
-      headers: {},
-      */ accepts: {
+		timeout: 0,
+		data: null,
+		dataType: null,
+		username: null,
+		password: null,
+		cache: null,
+		throws: false,
+		traditional: false,
+		headers: {},
+		*/ accepts: {
                             "*": allTypes,
                             text: "text/plain",
                             html: "text/html",
@@ -11625,8 +11625,8 @@
                 // Keep a copy of the old load method
                 var _load = jQuery.fn.load;
                 /**
-   * Load a url into a page
-   */ jQuery.fn.load = function(url, params, callback) {
+ * Load a url into a page
+ */ jQuery.fn.load = function(url, params, callback) {
                     if (typeof url !== "string" && _load) return _load.apply(this, arguments);
                     var selector, type, response, self = this, off = url.indexOf(" ");
                     if (off >= 0) {
@@ -11670,8 +11670,8 @@
                 };
                 var docElem1 = window1.document.documentElement;
                 /**
-   * Gets a window from an element
-   */ function getWindow(elem) {
+ * Gets a window from an element
+ */ function getWindow(elem) {
                     return jQuery.isWindow(elem) ? elem : elem.nodeType === 9 && elem.defaultView;
                 }
                 jQuery.offset = {
@@ -12324,29 +12324,29 @@
                     //    https://gist.github.com/aaronk6/bff7cc600d863d31a7bf
                     //    http://www.artandlogic.com/blog/2013/11/jquery-ajax-blobs-and-array-buffers/
                     /**
-       * Register ajax transports for blob send/recieve and array buffer send/receive via XMLHttpRequest Level 2
-       * within the comfortable framework of the jquery ajax request, with full support for promises.
-       *
-       * Notice the +* in the dataType string? The + indicates we want this transport to be prepended to the list
-       * of potential transports (so it gets first dibs if the request passes the conditions within to provide the
-       * ajax transport, preventing the standard transport from hogging the request), and the * indicates that
-       * potentially any request with any dataType might want to use the transports provided herein.
-       *
-       * Remember to specify 'processData:false' in the ajax options when attempting to send a blob or arraybuffer -
-       * otherwise jquery will try (and fail) to convert the blob or buffer into a query string.
-       */ jquery.ajaxTransport("+*", function(options, originalOptions, jqXHR) {
+     * Register ajax transports for blob send/recieve and array buffer send/receive via XMLHttpRequest Level 2
+     * within the comfortable framework of the jquery ajax request, with full support for promises.
+     *
+     * Notice the +* in the dataType string? The + indicates we want this transport to be prepended to the list
+     * of potential transports (so it gets first dibs if the request passes the conditions within to provide the
+     * ajax transport, preventing the standard transport from hogging the request), and the * indicates that
+     * potentially any request with any dataType might want to use the transports provided herein.
+     *
+     * Remember to specify 'processData:false' in the ajax options when attempting to send a blob or arraybuffer -
+     * otherwise jquery will try (and fail) to convert the blob or buffer into a query string.
+     */ jquery.ajaxTransport("+*", function(options, originalOptions, jqXHR) {
                         // Test for the conditions that mean we can/want to send/receive blobs or arraybuffers - we need XMLHttpRequest
                         // level 2 (so feature-detect against window.FormData), feature detect against window.Blob or window.ArrayBuffer,
                         // and then check to see if the dataType is blob/arraybuffer or the data itself is a Blob/ArrayBuffer
                         if (window.FormData && (options.dataType && (options.dataType === 'blob' || options.dataType === 'arraybuffer') || options.data && (window.Blob && options.data instanceof Blob || window.ArrayBuffer && options.data instanceof ArrayBuffer))) return {
                             /**
-                   * Return a transport capable of sending and/or receiving blobs - in this case, we instantiate
-                   * a new XMLHttpRequest and use it to actually perform the request, and funnel the result back
-                   * into the jquery complete callback (such as the success function, done blocks, etc.)
-                   *
-                   * @param headers
-                   * @param completeCallback
-                   */ send: function(headers, completeCallback) {
+                 * Return a transport capable of sending and/or receiving blobs - in this case, we instantiate
+                 * a new XMLHttpRequest and use it to actually perform the request, and funnel the result back
+                 * into the jquery complete callback (such as the success function, done blocks, etc.)
+                 *
+                 * @param headers
+                 * @param completeCallback
+                 */ send: function(headers, completeCallback) {
                                 var xhr = new XMLHttpRequest(), url = options.url || window.location.href, type = options.type || 'GET', dataType = options.dataType || 'text', data = options.data || null, async = options.async || true, key;
                                 xhr.addEventListener('load', function() {
                                     var response = {}, status, isSuccess;
@@ -12451,10 +12451,10 @@
                     return str;
                 }
                 /**
-  * Get the previous token stored in sessionStorage
-  * based on fullSessionStorageSupport flag.
-  * @return object JSON tokenResponse
-  */ function getPreviousToken() {
+* Get the previous token stored in sessionStorage
+* based on fullSessionStorageSupport flag.
+* @return object JSON tokenResponse
+*/ function getPreviousToken() {
                     var token;
                     if (BBClient.settings.fullSessionStorageSupport) {
                         token = sessionStorage.tokenResponse;
@@ -12527,12 +12527,12 @@
                     return ret.promise;
                 }
                 /**
-   * This code is needed for the page refresh/reload workflow.
-   * When the access token is nearing expriration or is expired,
-   * this function will make an ajax POST call to obtain a new
-   * access token using the current refresh token.
-   * @return promise object
-   */ function completeTokenRefreshFlow() {
+ * This code is needed for the page refresh/reload workflow.
+ * When the access token is nearing expriration or is expired,
+ * this function will make an ajax POST call to obtain a new
+ * access token using the current refresh token.
+ * @return promise object
+ */ function completeTokenRefreshFlow() {
                     var ret = Adapter.get().defer();
                     var tokenResponse = getPreviousToken();
                     var state = JSON.parse(sessionStorage[tokenResponse.state]);
@@ -12604,11 +12604,11 @@
                     fullSessionStorageSupport: true
                 };
                 /**
-  * Check the tokenResponse object to see if it is valid or not.
-  * This is to handle the case of a refresh/reload of the page
-  * after the token was already obtain.
-  * @return boolean
-  */ function validTokenResponse() {
+* Check the tokenResponse object to see if it is valid or not.
+* This is to handle the case of a refresh/reload of the page
+* after the token was already obtain.
+* @return boolean
+*/ function validTokenResponse() {
                     if (BBClient.settings.fullSessionStorageSupport && sessionStorage.tokenResponse) return true;
                     else if (!BBClient.settings.fullSessionStorageSupport) {
                         var state = urlParam('state') || args.input && args.input.state;
