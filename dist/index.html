@@ -84,8 +84,8 @@
             <h4>Patient Name:</h4>
             <h4>Medical Record Number (MRN):</h4>
             <h4>Date Of Birth: </h4>
-            <h4>Patient Id: </h4>
-            <h4>Encounter Reference: </h4>
+            <!-- <h4>Patient Id: </h4>
+            <h4>Encounter Reference: </h4> -->
         </div>
         <div id="loading" class="spinner">
             <div class="bounce1"></div>
@@ -220,6 +220,7 @@ document.getElementById("defaultOpen").click();
                 localStorage.setItem('encounterRef', encounterID);
                 localStorage.setItem('fhirpatientid', patientID);
                 console.log(patientID, encounterID);
+                $('#loading').hide();
                 // document.getElementById("encounterRef").innerHTML = smart.tokenResponse.encounter;
                 // document.getElementById("fhirpatientid").innerHTML = patient.id;
                 var pt = patient.read();
