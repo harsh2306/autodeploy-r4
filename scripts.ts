@@ -41,8 +41,7 @@ var suggestions = document.getElementById('suggestions-content')
 
 // for Cerner clinical write testing only 
 
-var encounterReference = document.getElementById("encounterRef").innerHTML
-var practitionerReference = '12743472'
+
 // Theme Customization
 
 
@@ -88,18 +87,26 @@ let myTheme = EditorView.theme({
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // let PatientId= urlParams.get('Patientid')
-let PatientId = document.getElementById("fhirpatientid").innerHTML
 // let MI1_Client_ID = urlParams.get('MI1ClientID')
-let MI1_Client_ID = localStorage.getItem('MI1ClientId')
-console.log(PatientId, MI1_Client_ID)
-document.getElementById("mi1clientid").innerHTML = MI1_Client_ID
 // let MI1_Client_ID= document.getElementById("MI1ClientId").innerHTML
+
+for (var key in localStorage){
+	console.log(key, localStorage.getItem(key))
+ }
+
+let PatientId = localStorage.getItem('fhirpatientid')
+let MI1_Client_ID = localStorage.getItem('MI1ClientId')
+var encounterReference = localStorage.getItem('encounterRef')
+var practitionerReference = '12743472'
+console.log(PatientId, MI1_Client_ID)
+// document.getElementById("mi1clientid").innerHTML = MI1_Client_ID
 
 
 
 // generate id 
-// let MI1_Client_ID = 123456789
+// let MI1_Client_ID = '123456789'
 // let PatientId = "eq081-VQEgP8drUUqCWzHfw3"
+
 const fhirBody = {
 		"PatientId": PatientId, 
 		"MI1ClientID": MI1_Client_ID
@@ -134,16 +141,37 @@ dataJson.push({
 axios.post(apiUrl_Dev+"PatientData", fhirBody)
 	.then((response)=>{
 		console.log(response)
-		let dob = response.data[0].DOB
-		let mrn = response.data[0].MRN
-		let name = response.data[0].Name
-		let fhirHTMl =  document.getElementById("fhir")
-		var fhirHTMl_div =''
-		fhirHTMl_div+= '<div class="fhir-header"><h4>'
-		fhirHTMl_div+= 'Patient Name : '+name+'</h4>'
-		fhirHTMl_div+= '<h4> Medical Record Number (MRN): '+mrn+'</h4>'
-		fhirHTMl_div+= '<h4> Date Of Birth : '+dob+'</h4>'
-		fhirHTMl.innerHTML = fhirHTMl_div
+		if(response.data != [])
+		{
+			if(response.data.DOB && response.data.MRN && response.data.Name)
+			{
+				let dob = response.data.DOB
+				let mrn = response.data.MRN
+				let name = response.data.Name
+
+				let fhirHTMl =  document.getElementById("fhir")
+				var fhirHTMl_div =''
+				fhirHTMl_div+= '<div class="fhir-header"><h4>'
+				fhirHTMl_div+= 'Patient Name : '+name+'</h4>'
+				fhirHTMl_div+= '<h4> Medical Record Number (MRN): '+mrn+'</h4>'
+				fhirHTMl_div+= '<h4> Date Of Birth : '+dob+'</h4>'
+				fhirHTMl.innerHTML = fhirHTMl_div
+			}
+			else{
+				let  ErrorMessage = response.data.ErrorMessage
+				let  StatusCode = response.data.StatusCode
+				let  ErrorDescription = response.data.ErrorDescription
+				console.log(ErrorMessage)
+				alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
+			}
+		}
+		else{
+			let  ErrorMessage = response.data.ErrorMessage
+			let  StatusCode = response.data.StatusCode
+			let  ErrorDescription = response.data.ErrorDescription
+			console.log(ErrorMessage)
+			alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
+		}
 	})
 
 // local fhir api call to get patients condition
@@ -781,40 +809,85 @@ let getSendButton = document.getElementById('clinicalCreate')
 getSendButton.addEventListener('click', function(e){
 	let clinicalNoteBody = {}
 	let EncodedString = window.btoa(current_state.doc.toString());
-	if(MI1_Client_ID == '123456789'){
-		clinicalNoteBody = {
-			"MI1ClientID":MI1_Client_ID,
-			"patientId":PatientId,
-			"note_type_code":"11488-4",
-			"encounterReference": encounterReference,
-			"note_content":EncodedString
-		}
+	// Use - Testing for Cerner Read Note
+// let MI1_Client_ID = '1122334455'
+// let PatientId = "12724066"
+
+// Use - Testing for Epic Read Note
+// let MI1_Client_ID = '123456789'
+// let PatientId = "eq081-VQEgP8drUUqCWzHfw3"
+	console.log(encounterReference)
+	console.log(encounterReference == '\n')
+	if(encounterReference == '')
+	{
+		alert("Couldn't find Encounter Reference")
 	}
-	else{
-		clinicalNoteBody = {
-			"MI1ClientID":MI1_Client_ID,
-			"patientId":PatientId,
-			"practitionerReference":practitionerReference,
-			"encounterReference": encounterReference,
-			"note_content":EncodedString
-		}
-	}
-	
-	axios.post(apiUrl_Dev+'ClinicalNote', clinicalNoteBody).then(response=>{
-		
-		console.log(response)
-		if (parseInt(response.data[0].StatusCode)== 201){
-			BinaryUrl = response.data[0].BinaryUrl
-			alert("Note Created")
+	else
+	{
+		if(MI1_Client_ID == '123456789'){
+			clinicalNoteBody = {
+				"MI1ClientID":MI1_Client_ID,
+				"patientId":PatientId,
+				"note_type_code":"11488-4",
+				"encounterReference": encounterReference,
+				"note_content":EncodedString
+			}
 		}
 		else{
-			console.log('Error while processing create Clinical Note ')
-			console.log('PatientId: '+PatientId )
-			console.log('Response Status Code : '+response.data[0].StatusCode)
-			alert('Error while creating note')
-			
+			clinicalNoteBody = {
+				"MI1ClientID":MI1_Client_ID,
+				"patientId":PatientId,
+				"practitionerReference":practitionerReference,
+				"encounterReference": encounterReference,
+				"note_content":EncodedString
+			}
 		}
-	})
+		
+		axios.post(apiUrl_Dev+'ClinicalNote', clinicalNoteBody).then(response=>{
+			
+			console.log(response)
+			if(response.data != []){
+				if(response.data.BinaryURL_Location && response.data.Message && response.data.StatusCode)
+				{
+					let BinaryURL_Location = response.data.BinaryURL_Location
+					let Message = response.data.Message
+					let StatusCode = response.data.StatusCode
+					alert("BinaryURL_Location: "+BinaryURL_Location+"\nStatusCode: "+StatusCode+"\nMessage: "+Message)
+				}
+				else
+				{
+					let  ErrorMessage = response.data.ErrorMessage
+					let  StatusCode = response.data.StatusCode
+					let  ErrorDescription = response.data.ErrorDescription
+					console.log(ErrorMessage)
+					alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
+	
+				}
+			}
+			else
+				{
+					let  ErrorMessage = response.data.ErrorMessage
+					let  StatusCode = response.data.StatusCode
+					let  ErrorDescription = response.data.ErrorDescription
+					console.log(ErrorMessage)
+					alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
+	
+				}
+			// if (parseInt(response.data[0].StatusCode)== 201){
+			// 	BinaryUrl = response.data[0].BinaryUrl
+			// 	alert("Note Created")
+			// }
+			// else{
+			// 	console.log('Error while processing create Clinical Note ')
+			// 	console.log('PatientId: '+PatientId )
+			// 	console.log('Response Status Code : '+response.data[0].StatusCode)
+			// 	alert('Error while creating note')
+				
+			// }
+		})
+
+	}
+	
 })
 
 // Read Clinical data
@@ -833,20 +906,53 @@ getSendButton.addEventListener('click', function(e){
 let getReadButton = document.getElementById('clinicalRead')
 let returnData = []
 let clinicalreadresponsedata = ''
+// Use - Testing for Cerner Read Note
+// let MI1_Client_ID = '1122334455'
+// let PatientId = "12724066"
+
+// Use - Testing for Epic Read Note
+// let MI1_Client_ID = '123456789'
+// let PatientId = "eq081-VQEgP8drUUqCWzHfw3"
+
 getReadButton.addEventListener('click', function(e){
 	axios.post(apiUrl_Dev+'ReadClinicalNotes',{
 		"MI1ClientID":MI1_Client_ID,
 		"patientId":PatientId
 	}).then(response=>{
-		returnData = []
-		returnData = response.data
-		// console.log(returnData)
-		clinicalreadresponsedata = atob(returnData['returnData'][0]['EncodedData']);
-		console.log(clinicalreadresponsedata)
-		returnData = null
-		view.dispatch({
-			changes: {from: currentLineFrom, to: currentLineTo, insert: clinicalreadresponsedata}
-		});
+		console.log(response)
+		if(response.data != []){
+			if(response.data.ContentUrl && response.data.EncodedData && response.data.ContentType)
+			{
+				let ContentUrl = response.data.ContentUrl
+				let EncodedData = response.data.EncodedData
+				let ContentType = response.data.ContentType
+				clinicalreadresponsedata = atob(EncodedData);
+				EncodedData = null;
+				view.dispatch({
+					changes: {from: currentLineFrom, to: currentLineTo, insert: clinicalreadresponsedata}
+				});
+				
+			}
+			else
+			{
+				let  ErrorMessage = response.data.ErrorMessage
+				let  StatusCode = response.data.StatusCode
+				let  ErrorDescription = response.data.ErrorDescription
+				console.log(ErrorMessage)
+				alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
+
+			}
+		}
+		else
+		{
+			let  ErrorMessage = response.data.ErrorMessage
+			let  StatusCode = response.data.StatusCode
+			let  ErrorDescription = response.data.ErrorDescription
+			console.log(ErrorMessage)
+			alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
+		}
+		
+		
 	})
 })
 

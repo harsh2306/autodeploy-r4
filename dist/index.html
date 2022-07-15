@@ -70,7 +70,7 @@
 
 </style>
     <div id="parentFhir" class="container">
-        <label>fhirpatientid: </label>
+        <!-- <label>fhirpatientid: </label>
         <div id="fhirpatientid">
         </div>
         <label>encounterRef: </label>
@@ -79,7 +79,7 @@
         <label>MI1ClientId: </label>
         <div id="mi1clientid">
             MI1ClientId will get replace
-        </div>
+        </div> -->
         <div id="fhir">
             <h4>Patient Name:</h4>
             <h4>Medical Record Number (MRN):</h4>
@@ -215,8 +215,13 @@ document.getElementById("defaultOpen").click();
                 var patient = smart.patient;
                 console.log(patient);
                 console.log("Smart Object", smart);
-                document.getElementById("encounterRef").innerHTML = smart.tokenResponse.encounter;
-                document.getElementById("fhirpatientid").innerHTML = patient.id;
+                var patientID = patient.id;
+                var encounterID = smart.tokenResponse.encounter;
+                localStorage.setItem('encounterRef', encounterID);
+                localStorage.setItem('fhirpatientid', patientID);
+                console.log(patientID, encounterID);
+                // document.getElementById("encounterRef").innerHTML = smart.tokenResponse.encounter;
+                // document.getElementById("fhirpatientid").innerHTML = patient.id;
                 var pt = patient.read();
             } else onError();
         }
