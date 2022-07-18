@@ -49,7 +49,7 @@ if (url.searchParams.has("MI1ClientId")) {
         console.log("Found CERNER MI1ClientId");
         FHIR.oauth2.authorize({
             'client_id': '8df9817e-a492-45ef-813a-e1cd56300e59',
-            'scope': 'patient/Patient.read patient/Observation.read online_access launch openid fhirUser'
+            'scope': 'patient/Patient.read patient/Observation.read online_access launch openid fhirUser profile'
         });
     }
 } // export function getClientId(MI1ClientId){
