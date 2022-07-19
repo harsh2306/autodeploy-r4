@@ -6,8 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel index.html",
-    "stop": "parcel launch.html"
+    "start": "parcel index.html"
   },
   "keywords": [],
   "author": "",
