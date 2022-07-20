@@ -6,10 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build1":"parcel build index.html",
-    "build2": "parcel build launch.html",
-    "build3": "parcel build Epic_Home.html",
-    "build4": "parcel build Cerner_Home.html"
+    "build":"parcel build index.html",
+    "build1": "parcel build launch.html"
   },
   "keywords": [],
   "author": "",
