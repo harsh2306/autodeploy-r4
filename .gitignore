@@ -1,7 +1,6 @@
 .cache
 .parcel-cache
 node_modules
-dist
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
