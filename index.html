@@ -217,6 +217,8 @@
                 function onReady(smart)  {
                     if (smart.hasOwnProperty('patient')) {
                         var patient = smart.patient;
+                        console.log(patient);
+                        console.log("Smart Object", smart);
                         var patientID = patient.id;
                         var encounterID = smart.tokenResponse.encounter;
                         localStorage.setItem('encounterRef', encounterID);
