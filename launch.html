@@ -30,6 +30,12 @@
       if (url.searchParams.has("MI1ClientId")){
         MI1ClientId = url.searchParams.get('MI1ClientId');
 
+        for (var key in localStorage){
+	        console.log(key, localStorage.getItem(key))
+        }
+
+        localStorage.clear()
+
         localStorage.setItem('MI1ClientId', MI1ClientId);
 
         //check if MI1cient Id id present in the URL or Not

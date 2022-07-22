@@ -225,6 +225,9 @@
                         localStorage.setItem('fhirpatientid', patientID);
                         $('#loading').hide();
                         var pt = patient.read();
+                        for (var key in localStorage){
+	                        console.log(key, localStorage.getItem(key))
+                        }
                     } else {
                         onError();
                     }
