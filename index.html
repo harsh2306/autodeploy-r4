@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Assessment and Plan test 1</title>
+    <title>Medical Intelligence One</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -76,16 +76,6 @@
         }
     </style>
     <div id="parentFhir" class="container">
-        <!-- <label>fhirpatientid: </label>
-        <div id="fhirpatientid">
-        </div>
-        <label>encounterRef: </label>
-        <div id="encounterRef">
-        </div>
-        <label>MI1ClientId: </label>
-        <div id="mi1clientid">
-            MI1ClientId will get replace
-        </div> -->
         <div id="fhir">
             <h4>Patient Name:</h4>
             <h4>Medical Record Number (MRN):</h4>
@@ -98,14 +88,13 @@
             <div class="bounce2"></div>
             <div class="bounce3"></div>
           </div>
-        <!-- <button id="jsondata">Get Json Data</button> -->
     </div>
     <div class="code-mirror-app">
 
         <div class="code-mirror-wrapper">
 
             <div id="editor-container" class="editor-container">
-                <h3>Assessment and Plan working</h3>
+                <h3>Assessment and Plan</h3>
                 <div class="editor" id="editor"></div>
                 <button id="clinicalCreate" style="margin-top:10px">Send Clinical Note</button>
                 <button id="clinicalRead" style="margin-top:10px">Read Clinical Note</button>
@@ -228,16 +217,11 @@
                 function onReady(smart)  {
                     if (smart.hasOwnProperty('patient')) {
                         var patient = smart.patient;
-                        console.log(patient);
-                        console.log("Smart Object", smart);
                         var patientID = patient.id;
                         var encounterID = smart.tokenResponse.encounter;
                         localStorage.setItem('encounterRef', encounterID);
                         localStorage.setItem('fhirpatientid', patientID);
-                        console.log(patientID, encounterID);
                         $('#loading').hide();
-                        // document.getElementById("encounterRef").innerHTML = smart.tokenResponse.encounter;
-                        // document.getElementById("fhirpatientid").innerHTML = patient.id;
                         var pt = patient.read();
                     } else {
                         onError();
@@ -266,7 +250,7 @@
           //Display 'Failed to call FHIR Service' if extractData failed
           function() {
             $('#loading').hide();
-            $('#errors').html('<p> Failed to call FHIR Service </p>');
+            $('#errors').html('<h3> Failed to call FHIR Service </h3>');
           }
         );
       </script>

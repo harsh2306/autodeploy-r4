@@ -7,7 +7,6 @@ import {autocompletion, CompletionContext} from "@codemirror/autocomplete"
 import {StateField, EditorSelection} from "@codemirror/state"
 import {Tooltip, showTooltip} from "@codemirror/tooltip"
 import {indentUnit} from '@codemirror/language'
-// import {getClientId} from 'launch.html'
 
 
 import axios from 'axios';
@@ -39,13 +38,7 @@ var isCheckingOrder = false
 var suggestions = document.getElementById('suggestions-content')
 
 
-// for Cerner clinical write testing only 
-
-
 // Theme Customization
-
-
-
 let myTheme = EditorView.theme({
   "cm-editor": {
     fontSize: "24px",
@@ -83,29 +76,14 @@ let myTheme = EditorView.theme({
 }, {dark: false})
 
 
-// get patient id and mi1 id from url 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-// let PatientId= urlParams.get('Patientid')
-// let MI1_Client_ID = urlParams.get('MI1ClientID')
-// let MI1_Client_ID= document.getElementById("MI1ClientId").innerHTML
-
-for (var key in localStorage){
-	console.log(key, localStorage.getItem(key))
- }
 
 let PatientId = localStorage.getItem('fhirpatientid')
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
 var encounterReference = localStorage.getItem('encounterRef')
 var practitionerReference = '12743472'
-console.log(PatientId, MI1_Client_ID)
-// document.getElementById("mi1clientid").innerHTML = MI1_Client_ID
 
 
 
-// generate id 
-// let MI1_Client_ID = '123456789'
-// let PatientId = "eq081-VQEgP8drUUqCWzHfw3"
 
 const fhirBody = {
 		"PatientId": PatientId, 
@@ -140,7 +118,6 @@ dataJson.push({
 // local fhir api call to get patients data 
 axios.post(apiUrl_Dev+"PatientData", fhirBody)
 	.then((response)=>{
-		console.log(response)
 		if(response.data != [])
 		{
 			if(response.data.DOB && response.data.MRN && response.data.Name)
@@ -161,7 +138,6 @@ axios.post(apiUrl_Dev+"PatientData", fhirBody)
 				let  ErrorMessage = response.data.ErrorMessage
 				let  StatusCode = response.data.StatusCode
 				let  ErrorDescription = response.data.ErrorDescription
-				console.log(ErrorMessage)
 				alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
 			}
 		}
@@ -169,7 +145,6 @@ axios.post(apiUrl_Dev+"PatientData", fhirBody)
 			let  ErrorMessage = response.data.ErrorMessage
 			let  StatusCode = response.data.StatusCode
 			let  ErrorDescription = response.data.ErrorDescription
-			console.log(ErrorMessage)
 			alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
 		}
 	})
@@ -657,9 +632,6 @@ document.getElementById('editor-container').onclick = function(){
 }
 
 
-// document.getElementById('jsondata').onclick = function(){
-// 	console.log(dataJson)
-// }
 // This function handles the behavior of clicking an order
 // from the sidebar
 
@@ -804,122 +776,76 @@ function bindProblemsSuggestions(){
 
 
 // Send data to create clinical note apiUrl
-let BinaryUrl = ""
 let getSendButton = document.getElementById('clinicalCreate')
 getSendButton.addEventListener('click', function(e){
 	let clinicalNoteBody = {}
 	let EncodedString = window.btoa(current_state.doc.toString());
-	// Use - Testing for Cerner Read Note
-// let MI1_Client_ID = '1122334455'
-// let PatientId = "12724066"
-
-// Use - Testing for Epic Read Note
-// let MI1_Client_ID = '123456789'
-// let PatientId = "eq081-VQEgP8drUUqCWzHfw3"
-	console.log(encounterReference)
-	console.log(encounterReference == '\n')
-	if(encounterReference == '')
-	{
-		alert("Couldn't find Encounter Reference")
-	}
-	else
-	{
-		if(MI1_Client_ID == '123456789'){
-			clinicalNoteBody = {
-				"MI1ClientID":MI1_Client_ID,
-				"patientId":PatientId,
-				"note_type_code":"11488-4",
-				"encounterReference": encounterReference,
-				"note_content":EncodedString
-			}
-		}
-		else{
-			clinicalNoteBody = {
-				"MI1ClientID":MI1_Client_ID,
-				"patientId":PatientId,
-				"practitionerReference":practitionerReference,
-				"encounterReference": encounterReference,
-				"note_content":EncodedString
-			}
-		}
-		
-		axios.post(apiUrl_Dev+'ClinicalNote', clinicalNoteBody).then(response=>{
-			
-			console.log(response)
-			if(response.data != []){
-				if(response.data.BinaryURL_Location && response.data.Message && response.data.StatusCode)
-				{
-					let BinaryURL_Location = response.data.BinaryURL_Location
-					let Message = response.data.Message
-					let StatusCode = response.data.StatusCode
-					alert("BinaryURL_Location: "+BinaryURL_Location+"\nStatusCode: "+StatusCode+"\nMessage: "+Message)
-				}
-				else
-				{
-					let  ErrorMessage = response.data.ErrorMessage
-					let  StatusCode = response.data.StatusCode
-					let  ErrorDescription = response.data.ErrorDescription
-					console.log(ErrorMessage)
-					alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
 	
-				}
+	if(MI1_Client_ID == '123456789'){
+		clinicalNoteBody = {
+			"MI1ClientID":MI1_Client_ID,
+			"patientId":PatientId,
+			"note_type_code":"11488-4",
+			"encounterReference": encounterReference,
+			"note_content":EncodedString
+		}
+	}
+	else{
+		clinicalNoteBody = {
+			"MI1ClientID":MI1_Client_ID,
+			"patientId":PatientId,
+			"practitionerReference":practitionerReference,
+			"encounterReference": encounterReference,
+			"note_content":EncodedString
+		}
+	}
+	
+	axios.post(apiUrl_Dev+'ClinicalNote', clinicalNoteBody).then(response=>{
+		
+		console.log(response)
+		if(response.data != []){
+			if(response.data.BinaryURL_Location && response.data.Message && response.data.StatusCode)
+			{
+				let BinaryURL_Location = response.data.BinaryURL_Location
+				let Message = response.data.Message
+				let StatusCode = response.data.StatusCode
+				alert("BinaryURL_Location: "+BinaryURL_Location+"\nStatusCode: "+StatusCode+"\nMessage: "+Message)
 			}
 			else
-				{
-					let  ErrorMessage = response.data.ErrorMessage
-					let  StatusCode = response.data.StatusCode
-					let  ErrorDescription = response.data.ErrorDescription
-					console.log(ErrorMessage)
-					alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
-	
-				}
-			// if (parseInt(response.data[0].StatusCode)== 201){
-			// 	BinaryUrl = response.data[0].BinaryUrl
-			// 	alert("Note Created")
-			// }
-			// else{
-			// 	console.log('Error while processing create Clinical Note ')
-			// 	console.log('PatientId: '+PatientId )
-			// 	console.log('Response Status Code : '+response.data[0].StatusCode)
-			// 	alert('Error while creating note')
-				
-			// }
-		})
+			{
+				let  ErrorMessage = response.data.ErrorMessage
+				let  StatusCode = response.data.StatusCode
+				let  ErrorDescription = response.data.ErrorDescription
+				console.log(ErrorMessage)
+				alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
 
-	}
+			}
+		}
+		else
+			{
+				let  ErrorMessage = response.data.ErrorMessage
+				let  StatusCode = response.data.StatusCode
+				let  ErrorDescription = response.data.ErrorDescription
+				console.log(ErrorMessage)
+				alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
+
+			}
+
+	})
+	
 	
 })
 
-// Read Clinical data
-// let getReadButton = document.getElementById('clinicalRead')
-// getReadButton.addEventListener('click', function(e){
-// 	axios.post(apiUrl+'ClinicalNoteRead',{
-// 		"MI1ClientID":MI1_Client_ID,
-// 		"patientId":"eXbMln3hu0PfFrpv2HgVHyg3",
-// 		'binaryId':BinaryUrl
-// 	}).then(response=>{
-// 		console.log(response.data);
-// 	})
-// })
-
-// Read latest 5 Clinical data
+// Read Clinical Note - DocumentReference.read
 let getReadButton = document.getElementById('clinicalRead')
-let returnData = []
 let clinicalreadresponsedata = ''
-// Use - Testing for Cerner Read Note
-// let MI1_Client_ID = '1122334455'
-// let PatientId = "12724066"
 
-// Use - Testing for Epic Read Note
-// let MI1_Client_ID = '123456789'
-// let PatientId = "eq081-VQEgP8drUUqCWzHfw3"
 
 getReadButton.addEventListener('click', function(e){
 	axios.post(apiUrl_Dev+'ReadClinicalNotes',{
 		"MI1ClientID":MI1_Client_ID,
 		"patientId":PatientId
 	}).then(response=>{
-		console.log(response)
 		if(response.data != []){
 			if(response.data.ContentUrl && response.data.EncodedData && response.data.ContentType)
 			{
@@ -938,7 +864,6 @@ getReadButton.addEventListener('click', function(e){
 				let  ErrorMessage = response.data.ErrorMessage
 				let  StatusCode = response.data.StatusCode
 				let  ErrorDescription = response.data.ErrorDescription
-				console.log(ErrorMessage)
 				alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
 
 			}
@@ -948,7 +873,6 @@ getReadButton.addEventListener('click', function(e){
 			let  ErrorMessage = response.data.ErrorMessage
 			let  StatusCode = response.data.StatusCode
 			let  ErrorDescription = response.data.ErrorDescription
-			console.log(ErrorMessage)
 			alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
 		}
 		
