@@ -221,7 +221,7 @@
                         console.log("Smart Object", smart);
                         var patientID = patient.id;
                         var encounterID = smart.tokenResponse.encounter;
-                        var parctitionerId = smart.user.userId;
+                        var parctitionerId = smart.userId;
                         console.log(parctitionerId);
                         localStorage.setItem('encounterRef', encounterID);
                         localStorage.setItem('fhirpatientid', patientID);
