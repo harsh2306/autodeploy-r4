@@ -80,7 +80,8 @@ let myTheme = EditorView.theme({
 let PatientId = localStorage.getItem('fhirpatientid')
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
 var encounterReference = localStorage.getItem('encounterRef')
-var practitionerReference = '12743472'
+var practitionerReference = localStorage.getItem('parctitionerId')
+
 
 
 
@@ -774,6 +775,15 @@ function bindProblemsSuggestions(){
 
 }
 
+//  function getPractitionerId():string {
+// 	let  PractiotionerID = ''
+// 	axios.post(apiUrl_Dev+'PractitionerReference', practitionerReference).then(response=>{
+// 		console.log(response.data)
+// 		PractiotionerID = response.data.PractiotionerID
+// 	}) 
+// 	return PractiotionerID
+// }
+
 
 // Send data to create clinical note apiUrl
 let getSendButton = document.getElementById('clinicalCreate')
@@ -794,7 +804,7 @@ getSendButton.addEventListener('click', function(e){
 		clinicalNoteBody = {
 			"MI1ClientID":MI1_Client_ID,
 			"patientId":PatientId,
-			"practitionerReference":practitionerReference,
+			"practitionerReference": practitionerReference,
 			"encounterReference": encounterReference,
 			"note_content":EncodedString
 		}

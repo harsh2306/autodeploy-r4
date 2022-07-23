@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel",
-    "build": "parcel build"
+    "start": "parcel --no-cache",
+    "build": "parcel build --no-cache"
   },
   "keywords": [],
   "author": "",
