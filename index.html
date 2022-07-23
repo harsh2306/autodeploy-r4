@@ -221,8 +221,10 @@
                         console.log("Smart Object", smart);
                         var patientID = patient.id;
                         var encounterID = smart.tokenResponse.encounter;
+                        var parctitionerId = smart.user.userId;
                         localStorage.setItem('encounterRef', encounterID);
                         localStorage.setItem('fhirpatientid', patientID);
+                        localStorage.setItem('parctitionerId', parctitionerId);
                         $('#loading').hide();
                         var pt = patient.read();
                         for (var key in localStorage){

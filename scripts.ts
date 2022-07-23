@@ -80,7 +80,11 @@ let myTheme = EditorView.theme({
 let PatientId = localStorage.getItem('fhirpatientid')
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
 var encounterReference = localStorage.getItem('encounterRef')
-var practitionerReference = '12743472'
+const practitionerReference = {
+	"PatientId": PatientId,
+	"MI1ClientID": MI1_Client_ID,
+	"PractitionerReferenceURL": localStorage.getItem('parctitionerId')
+}
 
 
 
@@ -224,7 +228,7 @@ async function fetchAutoComplete(startsWith){
 		]
 	}
 
-	await axios.post(apiUrl+'autocompleteProblems', body, {headers})
+	await axios.post(apiUrl_Dev+'autocompleteProblems', body, {headers})
 		.then(function (response) {		    
 			
 			if (response.data.length > 0){
@@ -288,7 +292,7 @@ async function fetchAutoCompleteOrders(startsWith){
 		]
 	}
 
-	await axios.post(apiUrl+'autocompleteOrders', body, {headers})
+	await axios.post(apiUrl_Dev+'autocompleteOrders', body, {headers})
 		.then(function (response) {	
 			if (response.data.length > 0){
 				searchOptions = []	
@@ -353,7 +357,7 @@ async function fetchProblems(CUI){
   document.getElementById('preloader').style.display = 'inline-flex'
   document.getElementById('particles-js').style.display = 'none'
 	suggestions.innerHTML = ''
-	await axios.post(apiUrl+'PotentialComorbidities', cuisBody, {headers})
+	await axios.post(apiUrl_Dev+'PotentialComorbidities', cuisBody, {headers})
 		.then(function (response) {
 			if(response.data.length === 0) {
 				// suggestions.innerHTML = '<div><h3>No Data for problems:</h3></div>'	
@@ -417,7 +421,7 @@ async function fetchProblems(CUI){
 
 	document.getElementById('preloader').style.display = 'inline-flex'
 	document.getElementById('particles-js').style.display = 'none'					
-	await axios.post(apiUrl+'AssocOrders', bodyUI, {headers})
+	await axios.post(apiUrl_Dev+'AssocOrders', bodyUI, {headers})
 	.then(function (response) {
 		
 		if(response.data.length==0){
@@ -774,6 +778,12 @@ function bindProblemsSuggestions(){
 
 }
 
+function getPractitionerId(){
+	axios.post(apiUrl_Dev+'PractitionerReference',practitionerReference).then(response=>{
+		console.log(response)
+	})
+}
+
 
 // Send data to create clinical note apiUrl
 let getSendButton = document.getElementById('clinicalCreate')
@@ -794,7 +804,7 @@ getSendButton.addEventListener('click', function(e){
 		clinicalNoteBody = {
 			"MI1ClientID":MI1_Client_ID,
 			"patientId":PatientId,
-			"practitionerReference":practitionerReference,
+			"practitionerReference":getPractitionerId(),
 			"encounterReference": encounterReference,
 			"note_content":EncodedString
 		}
