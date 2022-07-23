@@ -80,11 +80,8 @@ let myTheme = EditorView.theme({
 let PatientId = localStorage.getItem('fhirpatientid')
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
 var encounterReference = localStorage.getItem('encounterRef')
-const practitionerReference = {
-	"PatientId": PatientId,
-	"MI1ClientID": MI1_Client_ID,
-	"PractitionerReferenceURL": localStorage.getItem('parctitionerId')
-}
+var practitionerReference = localStorage.getItem('parctitionerId')
+
 
 
 
@@ -778,14 +775,14 @@ function bindProblemsSuggestions(){
 
 }
 
- function getPractitionerId():string {
-	let  PractiotionerID = ''
-	axios.post(apiUrl_Dev+'PractitionerReference', practitionerReference).then(response=>{
-		console.log(response.data)
-		PractiotionerID = response.data.PractiotionerID
-	}) 
-	return PractiotionerID
-}
+//  function getPractitionerId():string {
+// 	let  PractiotionerID = ''
+// 	axios.post(apiUrl_Dev+'PractitionerReference', practitionerReference).then(response=>{
+// 		console.log(response.data)
+// 		PractiotionerID = response.data.PractiotionerID
+// 	}) 
+// 	return PractiotionerID
+// }
 
 
 // Send data to create clinical note apiUrl
@@ -807,7 +804,7 @@ getSendButton.addEventListener('click', function(e){
 		clinicalNoteBody = {
 			"MI1ClientID":MI1_Client_ID,
 			"patientId":PatientId,
-			"practitionerReference": getPractitionerId(),
+			"practitionerReference": practitionerReference,
 			"encounterReference": encounterReference,
 			"note_content":EncodedString
 		}
