@@ -217,12 +217,12 @@
                 function onReady(smart)  {
                     if (smart.hasOwnProperty('patient')) {
                         var patient = smart.patient;
-                        console.log(patient);
+                        // console.log(patient);
                         console.log("Smart Object", smart);
+                        var parctitionerId = smart.userId;
+                        console.log('parctitionerId: '+parctitionerId);
                         var patientID = patient.id;
                         var encounterID = smart.tokenResponse.encounter;
-                        var parctitionerId = smart.userId;
-                        console.log(parctitionerId);
                         localStorage.setItem('encounterRef', encounterID);
                         localStorage.setItem('fhirpatientid', patientID);
                         localStorage.setItem('parctitionerId', parctitionerId);
