@@ -778,10 +778,13 @@ function bindProblemsSuggestions(){
 
 }
 
-function getPractitionerId(){
+ function getPractitionerId():string {
+	let  PractiotionerID = ''
 	axios.post(apiUrl_Dev+'PractitionerReference', practitionerReference).then(response=>{
-		console.log(response)
-	})
+		console.log(response.data)
+		PractiotionerID = response.data.PractiotionerID
+	}) 
+	return PractiotionerID
 }
 
 
@@ -804,7 +807,7 @@ getSendButton.addEventListener('click', function(e){
 		clinicalNoteBody = {
 			"MI1ClientID":MI1_Client_ID,
 			"patientId":PatientId,
-			"practitionerReference":getPractitionerId(),
+			"practitionerReference": getPractitionerId(),
 			"encounterReference": encounterReference,
 			"note_content":EncodedString
 		}
