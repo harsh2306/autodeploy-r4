@@ -228,7 +228,7 @@ async function fetchAutoComplete(startsWith){
 		]
 	}
 
-	await axios.post(apiUrl_Dev+'autocompleteProblems', body, {headers})
+	await axios.post(apiUrl+'autocompleteProblems', body, {headers})
 		.then(function (response) {		    
 			
 			if (response.data.length > 0){
@@ -292,7 +292,7 @@ async function fetchAutoCompleteOrders(startsWith){
 		]
 	}
 
-	await axios.post(apiUrl_Dev+'autocompleteOrders', body, {headers})
+	await axios.post(apiUrl+'autocompleteOrders', body, {headers})
 		.then(function (response) {	
 			if (response.data.length > 0){
 				searchOptions = []	
@@ -357,7 +357,7 @@ async function fetchProblems(CUI){
   document.getElementById('preloader').style.display = 'inline-flex'
   document.getElementById('particles-js').style.display = 'none'
 	suggestions.innerHTML = ''
-	await axios.post(apiUrl_Dev+'PotentialComorbidities', cuisBody, {headers})
+	await axios.post(apiUrl+'PotentialComorbidities', cuisBody, {headers})
 		.then(function (response) {
 			if(response.data.length === 0) {
 				// suggestions.innerHTML = '<div><h3>No Data for problems:</h3></div>'	
@@ -421,7 +421,7 @@ async function fetchProblems(CUI){
 
 	document.getElementById('preloader').style.display = 'inline-flex'
 	document.getElementById('particles-js').style.display = 'none'					
-	await axios.post(apiUrl_Dev+'AssocOrders', bodyUI, {headers})
+	await axios.post(apiUrl+'AssocOrders', bodyUI, {headers})
 	.then(function (response) {
 		
 		if(response.data.length==0){
@@ -779,7 +779,7 @@ function bindProblemsSuggestions(){
 }
 
 function getPractitionerId(){
-	axios.post(apiUrl_Dev+'PractitionerReference',practitionerReference).then(response=>{
+	axios.post(apiUrl_Dev+'PractitionerReference', practitionerReference).then(response=>{
 		console.log(response)
 	})
 }

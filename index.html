@@ -222,6 +222,7 @@
                         var patientID = patient.id;
                         var encounterID = smart.tokenResponse.encounter;
                         var parctitionerId = smart.user.userId;
+                        console.log(parctitionerId);
                         localStorage.setItem('encounterRef', encounterID);
                         localStorage.setItem('fhirpatientid', patientID);
                         localStorage.setItem('parctitionerId', parctitionerId);
