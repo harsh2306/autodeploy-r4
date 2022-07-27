@@ -76,16 +76,16 @@ let myTheme = EditorView.theme({
 }, {dark: false})
 
 
-let PatientId = global.globalPatientID
-let MI1_Client_ID = global.globalMI1ClientID
-var encounterReference = global.globalEncounterID
-var practitionerReference = global.globalParctitionerID
+// let PatientId = global.globalPatientID
+// let MI1_Client_ID = global.globalMI1ClientID
+// var encounterReference = global.globalEncounterID
+// var practitionerReference = global.globalParctitionerID
 
-console.log(PatientId)
-// let PatientId = localStorage.getItem('fhirpatientid')
-// let MI1_Client_ID = localStorage.getItem('MI1ClientId')
-// var encounterReference = localStorage.getItem('encounterRef')
-// var practitionerReference = localStorage.getItem('parctitionerId')
+// console.log(PatientId)
+let PatientId = localStorage.getItem('fhirpatientid')
+let MI1_Client_ID = localStorage.getItem('MI1ClientId')
+var encounterReference = localStorage.getItem('encounterRef')
+var practitionerReference = localStorage.getItem('parctitionerId')
 
 
 
