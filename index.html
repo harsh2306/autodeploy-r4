@@ -187,7 +187,7 @@
         
     </div>
     </div>
-    <script type="module">
+    <script>
         function tabMgmt(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
@@ -220,10 +220,7 @@
                         var patient = smart.patient;
                         // console.log(patient);
                         console.log("Smart Object", smart);
-
-                        
                         var parctitionerId = smart.userId;
-                        
                         console.log('parctitionerId: ', parctitionerId);
                         patientID = patient.id;
                         var encounterID = smart.tokenResponse.encounter;
@@ -233,16 +230,6 @@
                         $('#loading').hide();
                         var pt = patient.read();
 
-                        const editJsonFile = require("edit-json-file");
-                        let file = editJsonFile(`./globalIDs.json`);
-                        file.set("globalPatientID", patient.id);
-                        file.set("globalEncounterID", encounterID);
-                        file.set("globalParctitionerID", smart.userId);
-
-                        file.save();
-                        file = editJsonFile(`./globalIDs.json`, {
-                            autosave: true
-                        });
                     } else {
                         onError();
                     }
