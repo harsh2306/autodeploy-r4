@@ -15,19 +15,7 @@ steps:
     versionSpec: '16.x'
   displayName: 'Install Node.js'
 
-- task: AzureAppServiceManage@0
-  inputs:
-    azureSubscription: 'Azure for Students(2)(36000fc5-3a82-4990-9709-6a571fb9219e)'
-    Action: 'Stop Azure App Service'
-    WebAppName: 'MI1-Autodeploy'
-
 - script: |
     npm install
     npm run build
   displayName: 'npm install and build'
-
-- task: AzureAppServiceManage@0
-  inputs:
-    azureSubscription: 'Azure for Students(3)(36000fc5-3a82-4990-9709-6a571fb9219e)'
-    Action: 'Start Azure App Service'
-    WebAppName: 'MI1-Autodeploy'
