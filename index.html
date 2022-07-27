@@ -206,10 +206,6 @@
         document.getElementById("defaultOpen").click();
 
         (function(window){
-            globalPatientID = ''
-            globalEncounterID = ''
-            globalParctitionerID = ''
-            // globalMI1ClientID = ''
 
             window.extractData = function() {
                 var ret = $.Deferred();
@@ -224,10 +220,6 @@
                         var patient = smart.patient;
                         // console.log(patient);
                         console.log("Smart Object", smart);
-                        globalParctitionerId = smart.userId;
-                        globalPatientID = patient.id;
-                        globalEncounterID = encounterID;
-                        // globalMI1ClientID = '';
 
                         
                         var parctitionerId = smart.userId;
@@ -240,9 +232,17 @@
                         localStorage.setItem('parctitionerId', parctitionerId);
                         $('#loading').hide();
                         var pt = patient.read();
-                        for (var key in localStorage){
-	                        console.log(key, localStorage.getItem(key))
-                        }
+
+                        const editJsonFile = require("edit-json-file");
+                        let file = editJsonFile(`./globalIDs.json`);
+                        file.set("globalPatientID", patient.id);
+                        file.set("globalEncounterID", encounterID);
+                        file.set("globalParctitionerID", smart.userId);
+
+                        file.save();
+                        file = editJsonFile(`./globalIDs.json`, {
+                            autosave: true
+                        });
                     } else {
                         onError();
                     }

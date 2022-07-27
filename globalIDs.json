@@ -1,0 +1,6 @@
+{
+    "globalPatientID" : "#globalPatientID#",
+    "globalEncounterID" : "#globalEncounterID#",
+    "globalParctitionerID" : "#globalParctitionerID#",
+    "globalMI1ClientID" : "#globalMI1ClientID#"
+}
