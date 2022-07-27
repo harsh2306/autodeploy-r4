@@ -187,6 +187,7 @@
         
     </div>
     </div>
+    <script type="module" src="scripts.ts" ></script>
     <script>
         function tabMgmt(evt, cityName) {
             var i, tabcontent, tablinks;
@@ -214,7 +215,7 @@
                     console.log('Loading error', arguments);
                     ret.reject();
                 }
-
+                
                 function onReady(smart)  {
                     if (smart.hasOwnProperty('patient')) {
                         var patient = smart.patient;
@@ -223,12 +224,28 @@
                         var parctitionerId = smart.userId;
                         console.log('parctitionerId: ', parctitionerId);
                         patientID = patient.id;
+                        
                         var encounterID = smart.tokenResponse.encounter;
                         localStorage.setItem('encounterRef', encounterID);
                         localStorage.setItem('fhirpatientid', patientID);
                         localStorage.setItem('parctitionerId', parctitionerId);
+
+                        // var PatientInfo = {
+                        //     PatientID : patient.id,
+                        //     EncounterID : smart.tokenResponse.encounter,
+                        //     ParctitionerID : parctitionerId,
+                        //     MI1ClientID : localStorage.setItem('MI1ClientId', MI1ClientId)
+                        // };
+                        
+
+
+
                         $('#loading').hide();
                         var pt = patient.read();
+
+                        for (var key in localStorage){
+                            console.log(key, localStorage.getItem(key))
+                        }
 
                     } else {
                         onError();
@@ -265,7 +282,7 @@
 
 
     <!-- Out typescript file -->
-    <script type="module" src="scripts.ts" ></script>
+    
 
     <!-- Import Particles.js and app.js files -->
     <script src="node_modules\particles.js\particles.js"></script>

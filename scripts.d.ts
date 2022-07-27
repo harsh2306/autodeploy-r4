@@ -1,10 +1,13 @@
-declare global {
-    var globalPatientID : any;
-    var globalEncounterID : any;
-    var globalParctitionerID : any;
-    var globalMI1ClientID : any;
-    
+declare module MPatientInfo {
+
+    export interface Main{
+        PatientID: string,
+        EncounterID : string,
+        ParctitionerID : string,
+        MI1ClientID : string
+
+    }
 
 }
 
-export{};
+declare var PatientInfo:MPatientInfo.Main ;

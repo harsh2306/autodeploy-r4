@@ -38,6 +38,8 @@ var isCheckingOrder = false
 var suggestions = document.getElementById('suggestions-content')
 
 
+//<reference path="scripts.d.ts" />
+
 // Theme Customization
 let myTheme = EditorView.theme({
   "cm-editor": {
@@ -77,21 +79,18 @@ let myTheme = EditorView.theme({
 
 
 
-declare var patientID
-declare var parctitionerId
-declare var encounterID
-declare var MI1ClientID
 
-let PatientId = patientID
-let MI1_Client_ID = MI1ClientID
-var encounterReference = encounterID
-var practitionerReference = parctitionerId
+
+// var PatientId = PatientInfo.PatientId
+// var MI1_Client_ID = PatientInfo.MI1ClientID
+// var encounterReference = PatientInfo.EncounterID
+// var practitionerReference = PatientInfo.ParctitionerID
 
 // console.log(PatientId)
-// let PatientId = localStorage.getItem('fhirpatientid')
-// let MI1_Client_ID = localStorage.getItem('MI1ClientId')
-// var encounterReference = localStorage.getItem('encounterRef')
-// var practitionerReference = localStorage.getItem('parctitionerId')
+let PatientId = localStorage.getItem('fhirpatientid')
+let MI1_Client_ID = localStorage.getItem('MI1ClientId')
+var encounterReference = localStorage.getItem('encounterRef')
+var practitionerReference = localStorage.getItem('parctitionerId')
 
 
 
