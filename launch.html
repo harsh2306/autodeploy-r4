@@ -26,6 +26,7 @@
     <script src='./lib/js/fhir-client-cerner-additions-1.0.0.js'></script>
     <script>
       var url = new URL(location.href);
+      globalMI1ClientID = ''
       console.log(url);
       if (url.searchParams.has("MI1ClientId")){
         MI1ClientId = url.searchParams.get('MI1ClientId');
@@ -35,7 +36,7 @@
         }
 
         
-
+        globalMI1ClientID = MI1ClientId
         localStorage.setItem('MI1ClientId', MI1ClientId);
 
         //check if MI1cient Id id present in the URL or Not

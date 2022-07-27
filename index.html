@@ -206,6 +206,11 @@
         document.getElementById("defaultOpen").click();
 
         (function(window){
+            globalPatientID = ''
+            globalEncounterID = ''
+            globalParctitionerID = ''
+            // globalMI1ClientID = ''
+
             window.extractData = function() {
                 var ret = $.Deferred();
 
@@ -219,9 +224,16 @@
                         var patient = smart.patient;
                         // console.log(patient);
                         console.log("Smart Object", smart);
+                        globalParctitionerId = smart.userId;
+                        globalPatientID = patient.id;
+                        globalEncounterID = encounterID;
+                        // globalMI1ClientID = '';
+
+                        
                         var parctitionerId = smart.userId;
+                        
                         console.log('parctitionerId: ', parctitionerId);
-                        var patientID = patient.id;
+                        patientID = patient.id;
                         var encounterID = smart.tokenResponse.encounter;
                         localStorage.setItem('encounterRef', encounterID);
                         localStorage.setItem('fhirpatientid', patientID);
