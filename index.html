@@ -189,15 +189,16 @@
     </div>
     <script type="module" src="scripts.ts" ></script>
     <script>
-        // fetch('./globalIDs.json')
-        // .then(function(res){
-        //     return res.json()
-        // })
-        // .then(
-        //     function(data){
-        //         console.log(data)
-        //     }
-        // );
+        fetch('./globalIDs.json')
+        .then(function(res){
+            console.log(res)
+            return res.json()
+        })
+        .then(
+            function(data){
+                console.log(data)
+            }
+        );
 
         function tabMgmt(evt, cityName) {
             var i, tabcontent, tablinks;
