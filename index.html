@@ -189,16 +189,6 @@
     </div>
     <script type="module" src="scripts.ts" ></script>
     <script>
-        fetch('./globalIDs.json')
-        .then(function(res){
-            console.log(res)
-            return res.json()
-        })
-        .then(
-            function(data){
-                console.log(data)
-            }
-        );
 
         function tabMgmt(evt, cityName) {
             var i, tabcontent, tablinks;
@@ -241,19 +231,6 @@
                         localStorage.setItem('fhirpatientid', patientID);
                         localStorage.setItem('parctitionerId', parctitionerId);
 
-                        // var PatientInfo = {
-                        //     PatientID : patient.id,
-                        //     EncounterID : smart.tokenResponse.encounter,
-                        //     ParctitionerID : parctitionerId,
-                        //     MI1ClientID : localStorage.setItem('MI1ClientId', MI1ClientId)
-                        // };
-
-                        // fetch('./globalIDs.json')
-                        // .then(results => results.json())
-                        // .then(console.log)
-                        
-
-
 
                         $('#loading').hide();
                         var pt = patient.read();
@@ -283,7 +260,7 @@
         extractData().then(
           //Display Patient Demographics and Observations if extractData was success
           function(p) {
-            drawVisualization(p);
+            // drawVisualization(p);
           },
   
           //Display 'Failed to call FHIR Service' if extractData failed

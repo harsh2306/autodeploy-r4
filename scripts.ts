@@ -87,6 +87,9 @@ let myTheme = EditorView.theme({
 // var practitionerReference = PatientInfo.ParctitionerID
 
 // console.log(PatientId)
+
+
+
 let PatientId = localStorage.getItem('fhirpatientid')
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
 var encounterReference = localStorage.getItem('encounterRef')
