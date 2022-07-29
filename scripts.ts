@@ -79,11 +79,27 @@ let myTheme = EditorView.theme({
 
 
 
+//added code
+// get patient id and mi1 id from url
+// const queryString = window.location.search;
+// const urlParams = new URLSearchParams(queryString);
+// let PatientId= urlParams.get('Patientid')
+// let MI1_Client_ID = urlParams.get('MI1ClientID')
+// let MI1_Client_ID= document.getElementById("MI1ClientId").innerHTML
 
-let PatientId = localStorage.getItem('fhirpatientid')
+let PatientId = document.getElementById("PatientId").innerHTML
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
-var encounterReference = localStorage.getItem('encounterRef')
-var practitionerReference = localStorage.getItem('parctitionerId')
+var encounterReference = document.getElementById("EncounterRef").innerHTML
+var practitionerReference = document.getElementById("ParctitionerId").innerHTML
+console.log(PatientId, MI1_Client_ID,encounterReference, practitionerReference)
+// document.getElementById("mi1clientid").innerHTML = MI1_Client_ID
+
+
+
+// let PatientId = localStorage.getItem('fhirpatientid')
+// let MI1_Client_ID = localStorage.getItem('MI1ClientId')
+// var encounterReference = localStorage.getItem('encounterRef')
+// var practitionerReference = localStorage.getItem('parctitionerId')
 
 
 

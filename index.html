@@ -82,6 +82,11 @@
         }
     </style>
     <div id="parentFhir" class="container">
+        <div>
+            <h4 id="PatientId"></h4>
+            <h4 id="ParctitionerId"></h4>
+            <h4 id="EncounterRef"></h4>
+        </div>
         <div id="fhir">
             <h4>Patient Name:</h4>
             <h4>Medical Record Number (MRN):</h4>
@@ -239,12 +244,15 @@
                         var parctitionerId = smart.userId;
                         console.log('parctitionerId: ', parctitionerId);
                         patientID = patient.id;
-
                         var encounterID = smart.tokenResponse.encounter;
-                        localStorage.setItem('encounterRef', encounterID);
-                        localStorage.setItem('fhirpatientid', patientID);
-                        localStorage.setItem('parctitionerId', parctitionerId);
 
+                        // localStorage.setItem('encounterRef', encounterID);
+                        // localStorage.setItem('fhirpatientid', patientID);
+                        // localStorage.setItem('parctitionerId', parctitionerId);
+
+                        document.getElementById("PatientId").innerHTML = patient.id;
+                        document.getElementById("ParctitionerId").innerHTML = smart.userId
+                        document.getElementById("EncounterRef").innerHTML = smart.tokenResponse.encounter;
 
                         $('#loading').hide();
                         var pt = patient.read();
