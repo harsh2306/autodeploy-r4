@@ -138,38 +138,38 @@ dataJson.push({
 
 // local fhir api call to get patients data 
 
-axios.post(apiUrl_Dev+"PatientData", fhirBody)
-.then((response)=>{
-	if(response.data != [])
-	{
-		if(response.data.DOB && response.data.MRN && response.data.Name)
-		{
-			let dob = response.data.DOB
-			let mrn = response.data.MRN
-			let name = response.data.Name
+// axios.post(apiUrl_Dev+"PatientData", fhirBody)
+// .then((response)=>{
+// 	if(response.data != [])
+// 	{
+// 		if(response.data.DOB && response.data.MRN && response.data.Name)
+// 		{
+// 			let dob = response.data.DOB
+// 			let mrn = response.data.MRN
+// 			let name = response.data.Name
 
-			let fhirHTMl =  document.getElementById("fhir")
-			var fhirHTMl_div =''
-			fhirHTMl_div+= '<div class="fhir-header"><h4>'
-			fhirHTMl_div+= 'Patient Name : '+name+'</h4>'
-			fhirHTMl_div+= '<h4> Medical Record Number (MRN): '+mrn+'</h4>'
-			fhirHTMl_div+= '<h4> Date Of Birth : '+dob+'</h4>'
-			fhirHTMl.innerHTML = fhirHTMl_div
-		}
-		else{
-			let  ErrorMessage = response.data.ErrorMessage
-			let  StatusCode = response.data.StatusCode
-			let  ErrorDescription = response.data.ErrorDescription
-			alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
-		}
-	}
-	else{
-		let  ErrorMessage = response.data.ErrorMessage
-		let  StatusCode = response.data.StatusCode
-		let  ErrorDescription = response.data.ErrorDescription
-		alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
-	}
-})
+// 			let fhirHTMl =  document.getElementById("fhir")
+// 			var fhirHTMl_div =''
+// 			fhirHTMl_div+= '<div class="fhir-header"><h4>'
+// 			fhirHTMl_div+= 'Patient Name : '+name+'</h4>'
+// 			fhirHTMl_div+= '<h4> Medical Record Number (MRN): '+mrn+'</h4>'
+// 			fhirHTMl_div+= '<h4> Date Of Birth : '+dob+'</h4>'
+// 			fhirHTMl.innerHTML = fhirHTMl_div
+// 		}
+// 		else{
+// 			let  ErrorMessage = response.data.ErrorMessage
+// 			let  StatusCode = response.data.StatusCode
+// 			let  ErrorDescription = response.data.ErrorDescription
+// 			alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
+// 		}
+// 	}
+// 	else{
+// 		let  ErrorMessage = response.data.ErrorMessage
+// 		let  StatusCode = response.data.StatusCode
+// 		let  ErrorDescription = response.data.ErrorDescription
+// 		alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
+// 	}
+// })
 
 
 
