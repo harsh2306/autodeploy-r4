@@ -88,13 +88,28 @@ let myTheme = EditorView.theme({
 
 // console.log(PatientId)
 
+declare var extractData;
+
+extractData().then(
+	//Display Patient Demographics and Observations if extractData was success
+	function () {
+		// drawVisualization(p);
+		console.log("drawVisualization")
+	},
+
+	//Display 'Failed to call FHIR Service' if extractData failed
+	function () {
+		// $('#loading').hide();
+		// $('#errors').html('<h3> Failed to call FHIR Service </h3>');
+		console.log(" Failed to call FHIR Service ")
+	}
+);
 
 
 let PatientId = localStorage.getItem('fhirpatientid')
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
 var encounterReference = localStorage.getItem('encounterRef')
 var practitionerReference = localStorage.getItem('parctitionerId')
-
 
 
 
