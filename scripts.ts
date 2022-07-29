@@ -88,23 +88,44 @@ let myTheme = EditorView.theme({
 
 // console.log(PatientId)
 
-declare var extractData;
+declare var FHIR
 
-extractData().then(
-	//Display Patient Demographics and Observations if extractData was success
-	function () {
-		// drawVisualization(p);
-		console.log("drawVisualization")
-	},
+var ret = $.Deferred();
 
-	//Display 'Failed to call FHIR Service' if extractData failed
-	function () {
+function onError() {
+	console.log('Loading error', arguments);
+	ret.reject();
+}
+
+function onReady(smart) {
+	if (smart.hasOwnProperty('patient')) {
+		var patient = smart.patient;
+		// console.log(patient);
+		console.log("Smart Object", smart);
+		var parctitionerId = smart.userId;
+		console.log('parctitionerId: ', parctitionerId);
+		var patientID = patient.id;
+
+		var encounterID = smart.tokenResponse.encounter;
+		localStorage.setItem('encounterRef', encounterID);
+		localStorage.setItem('fhirpatientid', patientID);
+		localStorage.setItem('parctitionerId', parctitionerId);
+
+
 		// $('#loading').hide();
-		// $('#errors').html('<h3> Failed to call FHIR Service </h3>');
-		console.log(" Failed to call FHIR Service ")
-	}
-);
+		var pt = patient.read();
 
+		for (var key in localStorage) {
+			console.log(key, localStorage.getItem(key))
+		}
+
+	} else {
+		onError();
+	}
+
+}
+
+FHIR.oauth2.ready(onReady, onError);
 
 let PatientId = localStorage.getItem('fhirpatientid')
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
