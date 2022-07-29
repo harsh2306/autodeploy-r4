@@ -83,9 +83,9 @@
     </style>
     <div id="parentFhir" class="container">
         <div>
-            <h4 id="PatientId"></h4>
-            <h4 id="ParctitionerId"></h4>
-            <h4 id="EncounterRef"></h4>
+            <h4 id="PatientId" style="display: None;">PatientId</h4>
+            <h4 id="ParctitionerId">ParctitionerId</h4>
+            <h4 id="EncounterRef">EncounterRef</h4>
         </div>
         <div id="fhir">
             <h4>Patient Name:</h4>
@@ -242,17 +242,19 @@
                         // console.log(patient);
                         console.log("Smart Object", smart);
                         var parctitionerId = smart.userId;
-                        console.log('parctitionerId: ', parctitionerId);
-                        patientID = patient.id;
+                        var patientID = patient.id;
                         var encounterID = smart.tokenResponse.encounter;
+
+                        console.log(patient.id,smart.userId,smart.tokenResponse.encounter);
+                        console.log(patientID,parctitionerId,encounterID)
 
                         // localStorage.setItem('encounterRef', encounterID);
                         // localStorage.setItem('fhirpatientid', patientID);
                         // localStorage.setItem('parctitionerId', parctitionerId);
 
-                        document.getElementById("PatientId").innerHTML = patient.id;
-                        document.getElementById("ParctitionerId").innerHTML = smart.userId
-                        document.getElementById("EncounterRef").innerHTML = smart.tokenResponse.encounter;
+                        document.getElementById("PatientId").innerHTML = patientID;
+                        document.getElementById("ParctitionerId").innerHTML = parctitionerId
+                        document.getElementById("EncounterRef").innerHTML = encounterID;
 
                         $('#loading').hide();
                         var pt = patient.read();
