@@ -231,6 +231,7 @@
 
             window.extractData = function () {
                 var ret = $.Deferred();
+                console.log("Inside window extractData")
 
                 function onError() {
                     console.log('Loading error', arguments);
@@ -239,6 +240,8 @@
 
                 function onReady(smart) {
                     if (smart.hasOwnProperty('patient')) {
+
+                        console.log("Smart Patient")
                         var patient = smart.patient;
                         // console.log(patient);
                         console.log("Smart Object", smart);
@@ -285,8 +288,10 @@
     <script>
 
         extractData().then(
+
             //Display Patient Demographics and Observations if extractData was success
             function (p) {
+                console.log("Inside extractData.then()")
                 // drawVisualization(p);
             },
 

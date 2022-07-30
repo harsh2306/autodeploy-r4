@@ -78,7 +78,7 @@ let myTheme = EditorView.theme({
 }, {dark: false})
 
 
-
+console.log("Inside Scripts.ts starting")
 
 let PatientId = document.getElementById("PatientId").innerHTML
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
@@ -930,3 +930,5 @@ function highlightSuggestions(){
 	}
 
 }
+
+console.log("Inside Scripts.ts end")
