@@ -7,7 +7,7 @@ import {autocompletion, CompletionContext} from "@codemirror/autocomplete"
 import {StateField, EditorSelection} from "@codemirror/state"
 import {Tooltip, showTooltip} from "@codemirror/tooltip"
 import {indentUnit} from '@codemirror/language'
-import FHIR from './lib/js/fhir-client-v0.1.12'
+import window from './lib/js/fhir-client-v0.1.12'
 
 
 import axios from 'axios';
@@ -140,7 +140,7 @@ let FHIRAuth = function () {
 			}
 
 		}
-		FHIR.oauth2.ready(onReady, onError);
+		window.FHIR.oauth2.ready(onReady, onError);
 
 		return ret.promise();
 	}
