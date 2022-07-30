@@ -7,8 +7,6 @@ import {autocompletion, CompletionContext} from "@codemirror/autocomplete"
 import {StateField, EditorSelection} from "@codemirror/state"
 import {Tooltip, showTooltip} from "@codemirror/tooltip"
 import {indentUnit} from '@codemirror/language'
-import window from './lib/js/fhir-client-v0.1.12'
-import FHIR from './lib/js/fhir-client-v0.1.12'
 
 
 import axios from 'axios';
@@ -81,84 +79,10 @@ let myTheme = EditorView.theme({
 
 
 
-//added code
-// get patient id and mi1 id from url
-// const queryString = window.location.search;
-// const urlParams = new URLSearchParams(queryString);
-// let PatientId= urlParams.get('Patientid')
-// let MI1_Client_ID = urlParams.get('MI1ClientID')
-// let MI1_Client_ID= document.getElementById("MI1ClientId").innerHTML
-
-
-// document.getElementById("mi1clientid").innerHTML = MI1_Client_ID
-
-
-
-// let PatientId = localStorage.getItem('fhirpatientid')
-// let MI1_Client_ID = localStorage.getItem('MI1ClientId')
-// var encounterReference = localStorage.getItem('encounterRef')
-// var practitionerReference = localStorage.getItem('parctitionerId')
-
-
-//added from script of index
-// let FHIRAuth = function (window) {
-
-// 	window.extractData = function () {
-// 		var ret = $.Deferred();
-
-// 		function onError() {
-// 			console.log('Loading error', arguments);
-// 			ret.reject();
-// 		}
-
-// 		function onReady(smart) {
-// 			if (smart.hasOwnProperty('patient')) {
-// 				var patient = smart.patient;
-// 				// console.log(patient);
-// 				console.log("Smart Object", smart);
-// 				var parctitionerId = smart.userId;
-// 				var patientID = patient.id;
-// 				var encounterID = smart.tokenResponse.encounter;
-
-// 				console.log(patient.id,smart.userId,smart.tokenResponse.encounter);
-// 				console.log(patientID,parctitionerId,encounterID)
-
-// 				// localStorage.setItem('encounterRef', encounterID);
-// 				// localStorage.setItem('fhirpatientid', patientID);
-// 				// localStorage.setItem('parctitionerId', parctitionerId);
-
-// 				document.getElementById("PatientId").innerHTML = patientID;
-// 				document.getElementById("ParctitionerId").innerHTML = parctitionerId
-// 				document.getElementById("EncounterRef").innerHTML = encounterID;
-
-// 				$('#loading').hide();
-// 				var pt = patient.read();
-
-// 				for (var key in localStorage) {
-// 					console.log(key, localStorage.getItem(key))
-// 				}
-
-// 			} else {
-// 				onError();
-// 			}
-
-// 		}
-// 		FHIR.oauth2.ready(onReady, onError);
-
-// 		return ret.promise();
-// 	}
-
-// }(window)
-
-
-// FHIRAuth
-
-
-
 
 let PatientId = document.getElementById("PatientId").innerHTML
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
-var encounterReference = document.getElementById("MI1ClientId").innerHTML
+var encounterReference = document.getElementById("EncounterRef").innerHTML
 var practitionerReference = document.getElementById("ParctitionerId").innerHTML
 console.log(PatientId, MI1_Client_ID,encounterReference, practitionerReference)
 
