@@ -86,6 +86,7 @@
             <h4 id="PatientId" style="display: None;">PatientId</h4>
             <h4 id="ParctitionerId">ParctitionerId</h4>
             <h4 id="EncounterRef">EncounterRef</h4>
+            <h4 id="smartObjectValue">NotUpdated</h4>
         </div>
         <div id="fhir">
             <h4>Patient Name:</h4>
@@ -255,10 +256,12 @@
                         // localStorage.setItem('encounterRef', encounterID);
                         // localStorage.setItem('fhirpatientid', patientID);
                         // localStorage.setItem('parctitionerId', parctitionerId);
-
+                        document.getElementById("smartObjectValue").innerHTML = 'Updated';
                         document.getElementById("PatientId").innerHTML = patientID;
                         document.getElementById("ParctitionerId").innerHTML = parctitionerId
                         document.getElementById("EncounterRef").innerHTML = encounterID;
+                        
+
 
                         $('#loading').hide();
                         var pt = patient.read();

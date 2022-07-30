@@ -118,7 +118,11 @@ dataJson.push({
 
 // local fhir api call to get patients data 
 
-axios.post(apiUrl_Dev+"PatientData", fhirBody)
+let smartObjectValue = document.getElementById('smartObjectValue')
+
+smartObjectValue.addEventListener("change",function(e){
+
+	axios.post(apiUrl_Dev+"PatientData", fhirBody)
 .then((response)=>{
 	if(response.data != [])
 	{
@@ -150,6 +154,9 @@ axios.post(apiUrl_Dev+"PatientData", fhirBody)
 		alert("ErrorMessage: "+ErrorMessage+"\nStatusCode: "+StatusCode+"\nErrorDescription: "+ErrorDescription)
 	}
 })
+})
+
+
 
 
 
