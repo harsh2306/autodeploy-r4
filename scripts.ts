@@ -8,6 +8,7 @@ import {StateField, EditorSelection} from "@codemirror/state"
 import {Tooltip, showTooltip} from "@codemirror/tooltip"
 import {indentUnit} from '@codemirror/language'
 import window from './lib/js/fhir-client-v0.1.12'
+import FHIR from './lib/js/fhir-client-v0.1.12'
 
 
 import axios from 'axios';
@@ -100,52 +101,60 @@ let myTheme = EditorView.theme({
 
 
 //added from script of index
-let FHIRAuth = function () {
-		var ret = $.Deferred();
+// let FHIRAuth = function (window) {
 
-		function onError() {
-			console.log('Loading error', arguments);
-			ret.reject();
-		}
+// 	window.extractData = function () {
+// 		var ret = $.Deferred();
 
-		function onReady(smart) {
-			if (smart.hasOwnProperty('patient')) {
-				var patient = smart.patient;
-				// console.log(patient);
-				console.log("Smart Object", smart);
-				var parctitionerId = smart.userId;
-				var patientID = patient.id;
-				var encounterID = smart.tokenResponse.encounter;
+// 		function onError() {
+// 			console.log('Loading error', arguments);
+// 			ret.reject();
+// 		}
 
-				console.log(patient.id,smart.userId,smart.tokenResponse.encounter);
-				console.log(patientID,parctitionerId,encounterID)
+// 		function onReady(smart) {
+// 			if (smart.hasOwnProperty('patient')) {
+// 				var patient = smart.patient;
+// 				// console.log(patient);
+// 				console.log("Smart Object", smart);
+// 				var parctitionerId = smart.userId;
+// 				var patientID = patient.id;
+// 				var encounterID = smart.tokenResponse.encounter;
 
-				// localStorage.setItem('encounterRef', encounterID);
-				// localStorage.setItem('fhirpatientid', patientID);
-				// localStorage.setItem('parctitionerId', parctitionerId);
+// 				console.log(patient.id,smart.userId,smart.tokenResponse.encounter);
+// 				console.log(patientID,parctitionerId,encounterID)
 
-				document.getElementById("PatientId").innerHTML = patientID;
-				document.getElementById("ParctitionerId").innerHTML = parctitionerId
-				document.getElementById("EncounterRef").innerHTML = encounterID;
+// 				// localStorage.setItem('encounterRef', encounterID);
+// 				// localStorage.setItem('fhirpatientid', patientID);
+// 				// localStorage.setItem('parctitionerId', parctitionerId);
 
-				$('#loading').hide();
-				var pt = patient.read();
+// 				document.getElementById("PatientId").innerHTML = patientID;
+// 				document.getElementById("ParctitionerId").innerHTML = parctitionerId
+// 				document.getElementById("EncounterRef").innerHTML = encounterID;
 
-				for (var key in localStorage) {
-					console.log(key, localStorage.getItem(key))
-				}
+// 				$('#loading').hide();
+// 				var pt = patient.read();
 
-			} else {
-				onError();
-			}
+// 				for (var key in localStorage) {
+// 					console.log(key, localStorage.getItem(key))
+// 				}
 
-		}
-		window.FHIR.oauth2.ready(onReady, onError);
+// 			} else {
+// 				onError();
+// 			}
 
-		return ret.promise();
-	}
+// 		}
+// 		FHIR.oauth2.ready(onReady, onError);
 
-FHIRAuth();
+// 		return ret.promise();
+// 	}
+
+// }(window)
+
+
+// FHIRAuth
+
+
+
 
 let PatientId = document.getElementById("PatientId").innerHTML
 let MI1_Client_ID = localStorage.getItem('MI1ClientId')
