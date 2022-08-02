@@ -897,17 +897,17 @@ getSendButton.addEventListener("click", function (e) {
   if (MI1_Client_ID == "123456789") {
     clinicalNoteBody = {
       MI1ClientID: MI1_Client_ID,
-      patientId: PatientId,
+      patientId: document.getElementById("PatientId").innerHTML,
       note_type_code: "11488-4",
-      encounterReference: encounterReference,
+      encounterReference: document.getElementById("EncounterRef").innerHTML,
       note_content: EncodedString,
     };
   } else {
     clinicalNoteBody = {
       MI1ClientID: MI1_Client_ID,
-      patientId: PatientId,
-      practitionerReference: practitionerReference,
-      encounterReference: encounterReference,
+      patientId: document.getElementById("PatientId").innerHTML,
+      practitionerReference: document.getElementById("ParctitionerId").innerHTML,
+      encounterReference: document.getElementById("EncounterRef").innerHTML,
       note_content: EncodedString,
     };
   }
@@ -970,7 +970,7 @@ getReadButton.addEventListener("click", function (e) {
   axios
     .post(apiUrl_Dev + "ReadClinicalNotes", {
       MI1ClientID: MI1_Client_ID,
-      patientId: PatientId,
+      patientId: document.getElementById("PatientId").innerHTML,
     })
     .then((response) => {
       if (response.data != []) {
