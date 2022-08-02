@@ -282,8 +282,11 @@
                         }).then(res => res.json())
                         .then(response => 
                         {
-                            
+                                    console.log(response);
+                                    console.log(typeof(response));
+                                    console.log(response.DOB);
                                 if (response.data != []) {
+                                    
                                 if (response.data.DOB && response.data.MRN && response.data.Name) {
                                     console.log(response);
                                     console.log(typeof(response));
@@ -291,7 +294,7 @@
                                     let dob = response.DOB;
                                     let mrn = response.MRN;
                                     let name = response.Name;
-                                    console.log(response.DOB);
+                                    
 
                                     let fhirHTMl = document.getElementById("fhir");
                                     var fhirHTMl_div = "";
