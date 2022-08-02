@@ -287,7 +287,7 @@
                                     console.log(response.DOB);
                                 if (response.data != []) {
                                     
-                                if (response.data.DOB && response.data.MRN && response.data.Name) {
+                                if (response.DOB && response.MRN && response.Name) {
                                     console.log(response);
                                     console.log(typeof(response));
                                     
@@ -304,9 +304,9 @@
                                     fhirHTMl_div += "<h4> Date Of Birth : " + dob + "</h4>";
                                     fhirHTMl.innerHTML = fhirHTMl_div;
                                 } else {
-                                    let ErrorMessage = response.data.ErrorMessage;
-                                    let StatusCode = response.data.StatusCode;
-                                    let ErrorDescription = response.data.ErrorDescription;
+                                    let ErrorMessage = response.ErrorMessage;
+                                    let StatusCode = response.StatusCode;
+                                    let ErrorDescription = response.ErrorDescription;
                                     alert(
                                     "ErrorMessage: " +
                                         ErrorMessage +
@@ -317,9 +317,9 @@
                                     );
                                 }
                                 } else {
-                                let ErrorMessage = response.data.ErrorMessage;
-                                let StatusCode = response.data.StatusCode;
-                                let ErrorDescription = response.data.ErrorDescription;
+                                let ErrorMessage = response.ErrorMessage;
+                                let StatusCode = response.StatusCode;
+                                let ErrorDescription = response.ErrorDescription;
                                 alert(
                                     "ErrorMessage: " +
                                     ErrorMessage +
@@ -337,9 +337,9 @@
                         $('#loading').hide();
                         var pt = patient.read();
 
-                        for (var key in localStorage) {
-                            console.log(key, localStorage.getItem(key))
-                        }
+                        // for (var key in localStorage) {
+                        //     console.log(key, localStorage.getItem(key))
+                        // }
 
                     } else {
                         onError();
