@@ -125,39 +125,6 @@ var practitionerReference = ''
 let smartObjectValue = document.getElementById("smartObjectValue");
 
 MI1_Client_ID = localStorage.getItem("MI1ClientId");
-
-console.log(smartObjectValue, smartObjectValue.innerHTML);
-// window.location.reload()
-if (smartObjectValue.innerHTML == "Updated") {
-  //Variables value updation
-  PatientId = document.getElementById("PatientId").innerHTML;
-  MI1_Client_ID = localStorage.getItem("MI1ClientId");
-  encounterReference = document.getElementById("EncounterRef").innerHTML;
-  practitionerReference = document.getElementById("ParctitionerId").innerHTML;
-
-  console.log(
-    PatientId,
-    MI1_Client_ID,
-    encounterReference,
-    practitionerReference
-  );
-
-  const fhirBody = {
-    PatientId: PatientId,
-    MI1ClientID: MI1_Client_ID,
-  };
-
-  const fhirConditionReadBody = {
-    patientId: PatientId,
-    MI1ClientID: MI1_Client_ID,
-  };
-  const fhirConditionsBody = {
-    patientId: PatientId,
-    category: "problem-list-item",
-    clinical_status: "active",
-    MI1ClientID: MI1_Client_ID,
-  };
-
   // get current time in epoch format
   const secondsSinceEpoch = Math.round(Date.now() / 1000);
 
@@ -170,6 +137,21 @@ if (smartObjectValue.innerHTML == "Updated") {
     "Order-Date": secondsSinceEpoch,
     Problems: [],
   });
+
+console.log(smartObjectValue, smartObjectValue.innerHTML);
+// window.location.reload()
+if (smartObjectValue.innerHTML == "Updated") {
+  //Variables value updation
+  PatientId = document.getElementById("PatientId").innerHTML;
+  MI1_Client_ID = localStorage.getItem("MI1ClientId");
+  encounterReference = document.getElementById("EncounterRef").innerHTML;
+  practitionerReference = document.getElementById("ParctitionerId").innerHTML;
+
+  const fhirBody = {
+    PatientId: PatientId,
+    MI1ClientID: MI1_Client_ID,
+  };
+
 
   //Patient Data API
   axios.post(apiUrl_Dev + "PatientData", fhirBody).then((response) => {
