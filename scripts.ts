@@ -124,7 +124,7 @@ var practitionerReference = ''
 
 let smartObjectValue = document.getElementById("smartObjectValue");
 
-
+MI1_Client_ID = localStorage.getItem("MI1ClientId");
 
 console.log(smartObjectValue, smartObjectValue.innerHTML);
 // window.location.reload()
