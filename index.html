@@ -271,9 +271,11 @@
                             PatientId: patientID,
                             MI1ClientID: localStorage.getItem('MI1ClientId')
                         };
+                        console.log(JSON.stringify(data));
                         fetch(url, {
                         method: 'POST', // or 'PUT'
                         body: JSON.stringify(data), // data can be `string` or {object}!
+                        
                         headers:{
                             'Content-Type': 'application/json'
                         }
