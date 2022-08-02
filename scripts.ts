@@ -147,54 +147,54 @@ if (smartObjectValue.innerHTML == "Updated") {
   encounterReference = document.getElementById("EncounterRef").innerHTML;
   practitionerReference = document.getElementById("ParctitionerId").innerHTML;
 
-  const fhirBody = {
-    PatientId: PatientId,
-    MI1ClientID: MI1_Client_ID,
-  };
+  // const fhirBody = {
+  //   PatientId: PatientId,
+  //   MI1ClientID: MI1_Client_ID,
+  // };
 
 
-  //Patient Data API
-  axios.post(apiUrl_Dev + "PatientData", fhirBody).then((response) => {
-    if (response.data != []) {
-      if (response.data.DOB && response.data.MRN && response.data.Name) {
-        let dob = response.data.DOB;
-        let mrn = response.data.MRN;
-        let name = response.data.Name;
+  // //Patient Data API
+  // axios.post(apiUrl_Dev + "PatientData", fhirBody).then((response) => {
+  //   if (response.data != []) {
+  //     if (response.data.DOB && response.data.MRN && response.data.Name) {
+  //       let dob = response.data.DOB;
+  //       let mrn = response.data.MRN;
+  //       let name = response.data.Name;
 
-        let fhirHTMl = document.getElementById("fhir");
-        var fhirHTMl_div = "";
-        fhirHTMl_div += '<div class="fhir-header"><h4>';
-        fhirHTMl_div += "Patient Name : " + name + "</h4>";
-        fhirHTMl_div += "<h4> Medical Record Number (MRN): " + mrn + "</h4>";
-        fhirHTMl_div += "<h4> Date Of Birth : " + dob + "</h4>";
-        fhirHTMl.innerHTML = fhirHTMl_div;
-      } else {
-        let ErrorMessage = response.data.ErrorMessage;
-        let StatusCode = response.data.StatusCode;
-        let ErrorDescription = response.data.ErrorDescription;
-        alert(
-          "ErrorMessage: " +
-            ErrorMessage +
-            "\nStatusCode: " +
-            StatusCode +
-            "\nErrorDescription: " +
-            ErrorDescription
-        );
-      }
-    } else {
-      let ErrorMessage = response.data.ErrorMessage;
-      let StatusCode = response.data.StatusCode;
-      let ErrorDescription = response.data.ErrorDescription;
-      alert(
-        "ErrorMessage: " +
-          ErrorMessage +
-          "\nStatusCode: " +
-          StatusCode +
-          "\nErrorDescription: " +
-          ErrorDescription
-      );
-    }
-  });
+  //       let fhirHTMl = document.getElementById("fhir");
+  //       var fhirHTMl_div = "";
+  //       fhirHTMl_div += '<div class="fhir-header"><h4>';
+  //       fhirHTMl_div += "Patient Name : " + name + "</h4>";
+  //       fhirHTMl_div += "<h4> Medical Record Number (MRN): " + mrn + "</h4>";
+  //       fhirHTMl_div += "<h4> Date Of Birth : " + dob + "</h4>";
+  //       fhirHTMl.innerHTML = fhirHTMl_div;
+  //     } else {
+  //       let ErrorMessage = response.data.ErrorMessage;
+  //       let StatusCode = response.data.StatusCode;
+  //       let ErrorDescription = response.data.ErrorDescription;
+  //       alert(
+  //         "ErrorMessage: " +
+  //           ErrorMessage +
+  //           "\nStatusCode: " +
+  //           StatusCode +
+  //           "\nErrorDescription: " +
+  //           ErrorDescription
+  //       );
+  //     }
+  //   } else {
+  //     let ErrorMessage = response.data.ErrorMessage;
+  //     let StatusCode = response.data.StatusCode;
+  //     let ErrorDescription = response.data.ErrorDescription;
+  //     alert(
+  //       "ErrorMessage: " +
+  //         ErrorMessage +
+  //         "\nStatusCode: " +
+  //         StatusCode +
+  //         "\nErrorDescription: " +
+  //         ErrorDescription
+  //     );
+  //   }
+  // });
 
 } else {
 	console.log("Smart not updated");
