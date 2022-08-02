@@ -214,6 +214,10 @@ if (smartObjectValue.innerHTML == "Updated") {
     }
   });
 
+} else {
+	console.log("Smart not updated");
+  }
+
 
 // local fhir api call to get patients condition
 // setTimeout(() => {
@@ -1060,7 +1064,5 @@ function highlightSuggestions() {
     }
   }
 }
-} else {
-	console.log("Smart not updated");
-  }
+
 console.log("Inside Scripts.ts end");
