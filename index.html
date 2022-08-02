@@ -257,10 +257,29 @@
                         // localStorage.setItem('fhirpatientid', patientID);
                         // localStorage.setItem('parctitionerId', parctitionerId);
                         document.getElementById("smartObjectValue").innerHTML = 'Updated';
+                        
+
+
                         document.getElementById("PatientId").innerHTML = patientID;
                         document.getElementById("ParctitionerId").innerHTML = parctitionerId
                         document.getElementById("EncounterRef").innerHTML = encounterID;
-                        
+
+
+                        //PatientData
+                        var url = 'http://127.0.0.1:5000/PatientData';
+                        var data = {
+                            PatientId: patientID,
+                            MI1ClientID: localStorage.getItem('MI1ClientId')
+                        };
+                        fetch(url, {
+                        method: 'POST', // or 'PUT'
+                        body: data, // data can be `string` or {object}!
+                        headers:{
+                            'Content-Type': 'application/json'
+                        }
+                        }).then(res => res.json())
+                        .then(response => console.log('Success:', JSON.stringify(response)))
+                        .catch(error => console.error('Error:', error));
 
 
                         $('#loading').hide();
