@@ -285,9 +285,13 @@
                             
                                 if (response.data != []) {
                                 if (response.data.DOB && response.data.MRN && response.data.Name) {
-                                    let dob = response.data.DOB;
-                                    let mrn = response.data.MRN;
-                                    let name = response.data.Name;
+                                    console.log(response);
+                                    console.log(typeof(response));
+                                    
+                                    let dob = response.DOB;
+                                    let mrn = response.MRN;
+                                    let name = response.Name;
+                                    console.log(response.DOB);
 
                                     let fhirHTMl = document.getElementById("fhir");
                                     var fhirHTMl_div = "";
