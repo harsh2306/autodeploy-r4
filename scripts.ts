@@ -127,7 +127,7 @@ let smartObjectValue = document.getElementById("smartObjectValue");
 
 
 console.log(smartObjectValue, smartObjectValue.innerHTML);
-window.location.reload()
+// window.location.reload()
 if (smartObjectValue.innerHTML == "Updated") {
   //Variables value updation
   PatientId = document.getElementById("PatientId").innerHTML;
