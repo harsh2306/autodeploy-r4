@@ -273,7 +273,7 @@
                         };
                         fetch(url, {
                         method: 'POST', // or 'PUT'
-                        body: data, // data can be `string` or {object}!
+                        body: JSON.stringify(data), // data can be `string` or {object}!
                         headers:{
                             'Content-Type': 'application/json'
                         }
